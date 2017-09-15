@@ -1,1 +1,0 @@
-../dataFiles/observaciones/timeSeries_19564_node.txt

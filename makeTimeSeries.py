@@ -22,7 +22,7 @@
 import netCDF4 as nc
 import numpy
 import numpy.ma as ma
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 #-----------------BEGIN PROGRAM--------------------------------------------------------
 
 #We start by loading the ncfile, with reading permissions to avoid changing anything.
