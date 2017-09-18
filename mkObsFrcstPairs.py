@@ -28,6 +28,9 @@
 import sys
 import csv
 import numpy as np
+from datetime import datetime
+import pandas as pd
+import matplotlib.pyplot as plt
 
 #-----------ABRIR ARCHIVO----------------------------------
 #leemos el archivo
@@ -66,6 +69,7 @@ obs_lines = obs_lines[1:obs_num]
 #Debemos ahora pasar el contenido de las listas de strings a flotantes
 
 obs_list = []
+date_list = []
 for line in obs_lines:
 	obs_lines_split = [x.strip() for x in line.split()]
 	date = obs_lines_split[0].split('-')
@@ -73,6 +77,7 @@ for line in obs_lines:
 	[obs_lines_split.insert(0,i) for i in reversed(date)]
 	obs_lines_split = [float(i) for i in obs_lines_split]
 	obs_list.append(obs_lines_split)
+
 
 wrf_list = []
 for line in wrf_lines:
@@ -199,7 +204,7 @@ wrf_day = int(wrf_day)
 wrf_month = int(wrf_month)
 
 #Ahora escribimos esto a un archivo nuevo
-file_str = "../dataFiles/pares/24h/ObsFct_Pairs_{}_{}_{}_15.txt".format(adcirc_node,wrf_day+10,wrf_month)
+file_str = "../dataFiles/pares/120h/ObsFct_Pairs_{}_{}_{}_15.txt".format(adcirc_node,wrf_day+10,wrf_month)
 
 #DEBUG_LINE:
 #file_str = "../dataFiles/pares/24h/ObsFct_Pairs_{}_{}_{}_{}_15.txt".format(var_name,wrf_station_name,wrf_day,wrf_month)
@@ -215,9 +220,21 @@ for line in pair_list:
 pair_file.close()
 
 
+##############TIME SERIES FOR PLOT SECTION###################################
+date_list=[]
+for line in pair_list:
+    date_str = '2015/{}/{} {}:00'.format(int(line[0]),int(line[1]),int(line[2])) 
+    date_list.append(date_str)
 
-
-
-
+dates = pd.to_datetime(date_list)
+adcirc_forecast=[]
+observation=[]
+for value in pair_list:
+    adcirc_forecast.append(value[4])
+    observation.append(value[3])
+    
+adcirc_series = pd.Series(adcirc_forecast, index=dates)
+observ_series = pd.Series(observation,index=dates)
+joint_series = pd.DataFrame({'obs' : observ_series,'adc' : adcirc_series})
 
 
