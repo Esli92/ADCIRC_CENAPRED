@@ -5,6 +5,7 @@ import csv
 import numpy as np
 from datetime import datetime
 import pandas as pd
+import matplotlib.pyplot as plt
 #-----------ABRIR ARCHIVO----------------------------------
 #leemos el archivo
 
@@ -116,3 +117,50 @@ for i in test:
 
 #This section fills the nan values with the closest existing value backwards. (Or as it's called, the forward method).
 fore_series = fore_series.fillna(method='pad')
+
+
+###############################JOINING TIME SERIES##########################################################
+#We can now create a dataframe object containing both TS:
+
+pronobsts = pd.DataFrame({'mar_astr' : fore_series,'elev_obs' : elev_series})
+
+#Print to CSV file.
+pronobsts.to_csv('testout.txt',sep=' ',na_rep='nan',date_format='%Y-%m-%d %H %M %S',index_label='date',quotechar=' ')
+#pronobsts.plot()
+#plt.show()
+
+#Make window methods for statistics
+
+r = pronobsts.rolling(window=720,center=True,min_periods=23)
+
+#pronobsts.plot(subplots=True)
+#r.mean().plot(subplots=True)
+
+#plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

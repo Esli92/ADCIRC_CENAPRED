@@ -35,8 +35,8 @@ import numpy as np
 cl_line = sys.argv
 
 #Lineas usadas en el debug 
-OBS_file_name = 'testmarea.txt'
-WRF_file_name = 'timeSeries_19564_node.txt'
+OBS_file_name = 'testout.txt'
+WRF_file_name = 'timeSeries_17521_node.txt'
 	
 #OBS_file_name = cl_line[1]
 #WRF_file_name = cl_line[2]
