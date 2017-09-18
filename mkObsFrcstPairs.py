@@ -67,7 +67,7 @@ obs_lines = obs_lines[1:obs_num]
 
 obs_list = []
 for line in obs_lines:
-	obs_lines_split = [x.strip() for x in line.split('\t')]
+	obs_lines_split = [x.strip() for x in line.split()]
 	date = obs_lines_split[0].split('-')
 	obs_lines_split = obs_lines_split[1:len(obs_lines_split)]
 	[obs_lines_split.insert(0,i) for i in reversed(date)]
