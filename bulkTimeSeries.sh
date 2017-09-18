@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash +x
 
 #bulkTimeSeries.sh 
 #Programa para generar series de tiempo de muchas salidas de ADCIRC (como todo un año por ejemplo), usando el programa getTimeSeries.py para cada archivo individual. 
@@ -19,7 +19,7 @@
 #----------------Directorios Locales, cambiar si es necesario----------------------------
 DIR_ADCIRC=/LUSTRE/ID/validacion_ADCIRC
 DIR_SCRIPT=`pwd`
-DIR_OUT=/LUSTRE/ID/TimeSeries2015
+DIR_OUT=/LUSTRE/ID/ADCIRC/TimeSeries2015
 
 #En este caso particular los archivos tienen este camino:
 #/LUSTRE/ID/validacion_ADCIRC/2015/01/gom/gom-2015-01-21-120h-fort.63.nc
@@ -36,12 +36,12 @@ do
         for DOMAIN in `ls $DIR_ADCIRC/$YEAR/$MONTH`
         do
             #Ahora nos movemos entre los diferentes archivos que hay, solo los fort.63.nc
-            for DAY in `ls $DIR_ADCIRC/$YEAR/$MONTH/*fort.63.nc | awk -F'-' '{print $4}'`
+            for DAY in `ls $DIR_ADCIRC/$YEAR/$MONTH/${DOMAIN}/*fort.63.nc | awk -F'-' '{print $4}'`
             do
                 FILENAME=${DOMAIN}-${YEAR}-${MONTH}-${DAY}-120h-fort.63.nc
                 #Aqui es donde empieza lo bueno, modificar el template para usarlo. 
                 #El primer paso es cambiar el nombre del archivo a usar
-                sed 's:'FILENAME':'$DIR_ADCIRC/$YEAR/$MONTH/$FILENAME':g' makeTimeSeries.py.template_${DOMINIO} > makeTimeSeries1.py 
+                sed 's:'FILENAME':'$DIR_ADCIRC/$YEAR/$MONTH/${DOMAIN}/$FILENAME':g' makeTimeSeries.py.template_${DOMAIN} > makeTimeSeries1.py 
                 sed 's:'OUTFILE':'${DIR_OUT}/${MONTH}/TimeSeries_${DOMAIN}_m_${MONTH}_d_${DAY}_120h':g' makeTimeSeries1.py > makeTimeSeries.py
                 
             done

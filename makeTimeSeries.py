@@ -27,7 +27,7 @@ import numpy.ma as ma
 
 #We start by loading the ncfile, with reading permissions to avoid changing anything.
 
-ncfile = nc.Dataset("../dataFiles/fort.63.nc","r",format="NETCDF4")
+ncfile = nc.Dataset("/LUSTRE/ID/validacion_ADCIRC/2015/12/pom/pom-2015-12-29-120h-fort.63.nc","r",format="NETCDF4")
 
 #We can now get the variables needed, u10, v10 and MSLP.
 
@@ -54,7 +54,7 @@ dates = nc.num2date(time[:],units=time.units,calendar='standard')
 for node in nodes:
     zeta_node = zeta[:,node]
     #Print the file
-    filename = '../dataFiles/timeSeries_{}_node.txt'.format(node)
+    filename = '/LUSTRE/ID/ADCIRC/TimeSeries2015/12/TimeSeries_pom_m_12_d_29_120h_{}_node.txt'.format(node)
     o_file = open(filename,'w')
     for tim in range(n_tim):
         if zeta_node[tim] is ma.masked:
