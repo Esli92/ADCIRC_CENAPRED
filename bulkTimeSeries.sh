@@ -43,7 +43,7 @@ do
                 #El primer paso es cambiar el nombre del archivo a usar
                 sed 's:'FILENAME':'$DIR_ADCIRC/$YEAR/$MONTH/${DOMAIN}/$FILENAME':g' makeTimeSeries.py.template_${DOMAIN} > makeTimeSeries1.py 
                 sed 's:'OUTFILE':'${DIR_OUT}/${MONTH}/TimeSeries_${DOMAIN}_m_${MONTH}_d_${DAY}_120h':g' makeTimeSeries1.py > makeTimeSeries.py
-                
+		python makeTimeSeries.py                
             done
         done
     done
