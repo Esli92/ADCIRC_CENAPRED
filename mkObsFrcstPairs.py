@@ -39,7 +39,7 @@ cl_line = sys.argv
 
 #Lineas usadas en el debug 
 OBS_file_name = 'testout.txt'
-WRF_file_name = 'timeSeries_17521_node.txt'
+WRF_file_name = 'TimeSeries_pom_m_02_d_04_120h_17521_node.txt'
 	
 #OBS_file_name = cl_line[1]
 #WRF_file_name = cl_line[2]
@@ -94,7 +94,7 @@ for line in wrf_lines:
 #Para obtener el mes y dia del archivo WRF usaremos la informacion del nombre de archivo. 
 #Nos aprovechamos de que tiene formato dd_mm_yy
 wrf_nam = WRF_file_name.split('_')
-adcirc_node = int(wrf_nam[1])
+adcirc_node = int(wrf_nam[7])
 #Quitamos lo que no es un numero para poder convertirlo a flotantes
 #Primero guardamos el nombre de la estacion
 #wrf_station_name = wrf_date[0]
