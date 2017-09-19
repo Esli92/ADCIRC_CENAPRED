@@ -44,7 +44,7 @@ do
                 #Aqui es donde empieza lo bueno, modificar el template para usarlo. 
                 #El primer paso es cambiar el nombre del archivo a usar
                 sed 's:'FILENAME':'$DIR_FOR/$YEAR/$MONTH/$FILENAME':g' mkObsFrcstPairs.py.template > mkPairs.py
-		#python mkPairs.py               
+		python mkPairs.py               
             done
         done
     done
