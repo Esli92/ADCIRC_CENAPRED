@@ -38,7 +38,7 @@ import matplotlib.pyplot as plt
 cl_line = sys.argv
 
 #Lineas usadas en el debug 
-OBS_file_name = 'testout.txt'
+OBS_file_name = '../dataFiles/observaciones/2015/testout.txt'
 WRF_file_name = 'FILENAME'
 	
 #OBS_file_name = cl_line[1]
