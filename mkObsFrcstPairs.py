@@ -236,5 +236,5 @@ for value in pair_list:
 adcirc_series = pd.Series(adcirc_forecast, index=dates)
 observ_series = pd.Series(observation,index=dates)
 joint_series = pd.DataFrame({'obs' : observ_series,'adc' : adcirc_series})
-
+mean_series = pd.DataFrame({'obs-mean' : observ_series - observ_series.mean(),'adc-mean' : adcirc_series - adcirc_series.mean()})
 
