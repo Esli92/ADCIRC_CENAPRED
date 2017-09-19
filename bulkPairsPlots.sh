@@ -35,7 +35,7 @@ do
     do
         mkdir -p ${DIR_OUT}/${MONTH}
         #Y por ultimo nos movemos entre los dos dominios, gom y pom
-        for DOMAIN in gom pom
+        for DOMAIN in pom
         do
             #Ahora nos movemos entre los diferentes archivos que hay, solo los fort.63.nc
             for DAY in `ls $DIR_FOR/$YEAR/$MONTH/TimeSeries_${DOMAIN}_* | awk -F'_' '{print $6}'`
