@@ -38,7 +38,7 @@ do
         for DOMAIN in pom
         do
             #Ahora nos movemos entre los diferentes archivos que hay, solo los fort.63.nc
-            for DAY in `ls $DIR_FOR/$YEAR/$MONTH/TimeSeries_${DOMAIN}_* | awk -F'_' '{print $6}'`
+            for DAY in `ls $DIR_FOR/$YEAR/$MONTH/TimeSeries_${DOMAIN}_*_${NODE}_node.txt | awk -F'_' '{print $6}'`
             do
                 FILENAME=TimeSeries_${DOMAIN}_m_${MONTH}_d_${DAY}_120h_${NODE}_node.txt
                 #Aqui es donde empieza lo bueno, modificar el template para usarlo. 
