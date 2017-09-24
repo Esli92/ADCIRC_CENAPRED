@@ -31,6 +31,7 @@ import numpy as np
 from datetime import datetime
 import pandas as pd
 import matplotlib.pyplot as plt
+from shutil import copyfile
 
 #-----------ABRIR ARCHIVO----------------------------------
 #leemos el archivo
@@ -243,3 +244,12 @@ plt.ylabel('Elevacion (m)')
 figstr = 'ts_plot_d_{}_m_{}_node_{}.png'.format(wrf_day,wrf_month,adcirc_node)
 plt.savefig(figstr)
 
+############GET different pairs (24h, 48h, 120h, l24h, l48h, etc).
+oi = 0
+opts = ['02','24','47','79','91']
+for i in range(0,120,24):
+    cut_series = mean_series[i:i+24]
+    namestr = "ObsFct_Pairs_{}_{}_{}_e_{}_15.txt".format(adcirc_node,wrf_day+10,wrf_month,opts[oi])
+    oi = oi + 1
+    copyfile('pairHead',namestr)
+    cut_series.to_csv(namestr,sep=',',na_rep='nan',date_format='%m,%d,%H',header=True,quotechar=' ',mode='a')
