@@ -252,4 +252,29 @@ for i in range(0,120,24):
     namestr = "ObsFct_Pairs_{}_{}_{}_e_{}_15.txt".format(adcirc_node,wrf_day+10,wrf_month,opts[oi])
     oi = oi + 1
     copyfile('pairHead',namestr)
-    cut_series.to_csv(namestr,sep=',',na_rep='nan',date_format='%m,%d,%H',header=True,quotechar=' ',mode='a')
+    cut_series.to_csv(namestr,sep=',',na_rep='nan',date_format='%m,%d,%H',header=False,quotechar=' ',mode='a')
+
+oi = 0
+opts = ['06','61']
+for i in range(0,120,60):
+    cut_series = mean_series[i:i+60]
+    namestr = "ObsFct_Pairs_{}_{}_{}_e_{}_15.txt".format(adcirc_node,wrf_day+10,wrf_month,opts[oi])
+    oi = oi + 1
+    copyfile('pairHead',namestr)
+    cut_series.to_csv(namestr,sep=',',na_rep='nan',date_format='%m,%d,%H',header=False,quotechar=' ',mode='a')
+    
+cut_series = mean_series[0:48]
+namestr = "ObsFct_Pairs_{}_{}_{}_e_{}_15.txt".format(adcirc_node,wrf_day+10,wrf_month,'48')
+copyfile('pairHead',namestr)
+cut_series.to_csv(namestr,sep=',',na_rep='nan',date_format='%m,%d,%H',header=False,quotechar=' ',mode='a')
+
+cut_series = mean_series[96:120]
+namestr = "ObsFct_Pairs_{}_{}_{}_e_{}_15.txt".format(adcirc_node,wrf_day+10,wrf_month,'96')
+copyfile('pairHead',namestr)
+cut_series.to_csv(namestr,sep=',',na_rep='nan',date_format='%m,%d,%H',header=False,quotechar=' ',mode='a')
+
+
+cut_series = mean_series[72:120]
+namestr = "ObsFct_Pairs_{}_{}_{}_e_{}_15.txt".format(adcirc_node,wrf_day+10,wrf_month,'72')
+copyfile('pairHead',namestr)
+cut_series.to_csv(namestr,sep=',',na_rep='nan',date_format='%m,%d,%H',header=False,quotechar=' ',mode='a')

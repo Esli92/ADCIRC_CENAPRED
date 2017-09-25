@@ -31,6 +31,7 @@ import numpy as np
 from datetime import datetime
 import pandas as pd
 import matplotlib.pyplot as plt
+from shutil import copyfile
 
 #-----------ABRIR ARCHIVO----------------------------------
 #leemos el archivo
@@ -38,7 +39,7 @@ import matplotlib.pyplot as plt
 cl_line = sys.argv
 
 #Lineas usadas en el debug 
-OBS_file_name = '../dataFiles/observaciones/2015/testout.txt'
+OBS_file_name = 'OBSERVATIONFILE'
 WRF_file_name = 'FILENAME'
 	
 #OBS_file_name = cl_line[1]
@@ -238,7 +239,42 @@ observ_series = pd.Series(observation,index=dates)
 joint_series = pd.DataFrame({'obs' : observ_series,'adc' : adcirc_series})
 mean_series = pd.DataFrame({'obs-mean' : observ_series - observ_series.mean(),'adcirc-mean' : adcirc_series - adcirc_series.mean()})
 
-mean_series.plot()
-plt.ylabel('Elevacion (m)')
-figstr = '../figures/ts/ts_plot_d_{}_m_{}_node_{}.png'.format(wrf_day,wrf_month,adcirc_node)
-plt.savefig(figstr)
+#mean_series.plot()
+#plt.ylabel('Elevacion (m)')
+#figstr = '../figures/ts/ts_plot_d_{}_m_{}_node_{}.png'.format(wrf_day,wrf_month,adcirc_node)
+#plt.savefig(figstr)
+
+############GET different pairs (24h, 48h, 120h, l24h, l48h, etc).
+oi = 0
+opts = ['02','24','47','79','91']
+for i in range(0,120,24):
+    cut_series = mean_series[i:i+24]
+    namestr = "ObsFct_Pairs_{}_{}_{}_e_{}_15.txt".format(adcirc_node,wrf_day+10,wrf_month,opts[oi])
+    oi = oi + 1
+    copyfile('pairHead',namestr)
+    cut_series.to_csv(namestr,sep=',',na_rep='nan',date_format='%m,%d,%H',header=False,quotechar=' ',mode='a')
+
+oi = 0
+opts = ['06','61']
+for i in range(0,120,60):
+    cut_series = mean_series[i:i+60]
+    namestr = "ObsFct_Pairs_{}_{}_{}_e_{}_15.txt".format(adcirc_node,wrf_day+10,wrf_month,opts[oi])
+    oi = oi + 1
+    copyfile('pairHead',namestr)
+    cut_series.to_csv(namestr,sep=',',na_rep='nan',date_format='%m,%d,%H',header=False,quotechar=' ',mode='a')
+    
+cut_series = mean_series[0:48]
+namestr = "ObsFct_Pairs_{}_{}_{}_e_{}_15.txt".format(adcirc_node,wrf_day+10,wrf_month,'48')
+copyfile('pairHead',namestr)
+cut_series.to_csv(namestr,sep=',',na_rep='nan',date_format='%m,%d,%H',header=False,quotechar=' ',mode='a')
+
+cut_series = mean_series[96:120]
+namestr = "ObsFct_Pairs_{}_{}_{}_e_{}_15.txt".format(adcirc_node,wrf_day+10,wrf_month,'96')
+copyfile('pairHead',namestr)
+cut_series.to_csv(namestr,sep=',',na_rep='nan',date_format='%m,%d,%H',header=False,quotechar=' ',mode='a')
+
+
+cut_series = mean_series[72:120]
+namestr = "ObsFct_Pairs_{}_{}_{}_e_{}_15.txt".format(adcirc_node,wrf_day+10,wrf_month,'72')
+copyfile('pairHead',namestr)
+cut_series.to_csv(namestr,sep=',',na_rep='nan',date_format='%m,%d,%H',header=False,quotechar=' ',mode='a')
