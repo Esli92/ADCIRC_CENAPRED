@@ -19,7 +19,7 @@ DIRECTORIO_ESTACIONES=../dataFiles/estaciones
 DIRECTORIO_MESES=./fechas/months
 DIRECTORIO_DIAS=./fechas/days
 DIRECTORIO_MESES_SIM=meses_sim
-INTERVALO=120
+DIR_FOR=../dataFiles/pronosticos/timeSeries
 
 #Vamos a ir de RES>VAR>SEAS>STAT
 
@@ -30,6 +30,9 @@ then
 	mkdir verify_daily
 fi
 
+for INTERVALO in 02 24 47 79 91 06 61 48 96 72 120
+do
+
 
 if [ ! -d "verify_daily/${INTERVALO}" ]
 then
@@ -38,12 +41,16 @@ fi
 
 rm -rf verify_daily/${INTERVALO}/*
 
-
+for YEAR in `ls $DIR_FOR`
+do
     #mkdir verify_daily/${INTERVALO}/${VARIABLE}
-      for MES in `ls $DIRECTORIO_MESES`
+      for MES in `ls $DIR_FOR/$YEAR`
        do
+       for MONTH in `ls ${DIRECTORIO_MESES}`
+       do
+       DOMAIN=pom
        # source $DIRECTORIO_MESES/$MES
-            for DAY in `ls $DIRECTORIO_DIAS`
+            for DAY in `ls $DIR_FOR/$YEAR/$MES/TimeSeries_${DOMAIN}_*_17521_node.txt | awk -F'_' '{print $6}'`
             do
 
                 for STATION in `ls $DIRECTORIO_ESTACIONES`
@@ -54,13 +61,14 @@ rm -rf verify_daily/${INTERVALO}/*
                         sed 's/'STATION'/'${STATION}'/g' readStationVerify_daily.template > readStation.pre
                         sed 's/'INTERVALO'/'${INTERVALO}'/g' readStation.pre > readStation.pre2
                         sed 's/'DAY'/'${DAY}'/g' readStation.pre2 > readStation.pre
-                        sed 's/'NUES'/'${MES}'/g' readStation.pre > readStation.pre2
+                        sed 's/'NUES'/'${MONTH}'/g' readStation.pre > readStation.pre2
                         cat readStation.pre2 >> verify_daily/${INTERVALO}/R_scriptLines_${MES}_${DAY}_${STATION}.R
                         rm readStation.pre readStation.pre2
                 done
             done
       done
-            
-
+      done
+    done        
+done
 
 

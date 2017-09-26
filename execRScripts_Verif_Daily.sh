@@ -21,18 +21,28 @@ DIRECTORIO_ESTACIONES=../dataFiles/estaciones
 DIRECTORIO_MESES=./fechas/months
 DIRECTORIO_DIAS=./fechas/days
 DIRECTORIO_MESES_SIM=meses_sim
+DIR_FOR=../dataFiles/pronosticos/timeSeries
 INTERVALO=120
+DOMAIN=pom
+
+#for INTERVALO in 02 24 47 79 91 06 61 48 96 72 120
+for INTERVALO in 02
+do
 
 find ./verify_daily/${INTERVALO}/ -name "*.R" -exec R CMD BATCH {} \;
 
-mkdir verify_daily/${INTERVALO}/out
-for MES in `ls $DIRECTORIO_MESES`
+mkdir -p ./verify_daily/${INTERVALO}/out
+
+
+for MES in `ls $DIR_FOR/2015`
 do
 			for STATION in `ls $DIRECTORIO_ESTACIONES`
 			do
-				for DAY in `ls $DIRECTORIO_DIAS`
+				for DAY in `ls $DIR_FOR/2015/$MES/TimeSeries_${DOMAIN}_*_17521_node.txt | awk -F'_' '{print $6}'`
 				do
 				mv R_scriptLines_${MES}_${DAY}_${STATION}.Rout verify_daily/${INTERVALO}/out
 				done
 			done
+done
+
 done

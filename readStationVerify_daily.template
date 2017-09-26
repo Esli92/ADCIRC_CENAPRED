@@ -3,7 +3,7 @@ library(verification)
 
 #------- ESTACION STATION -----------------------------------------------------------------------------------------------------------------------------
 #--------RESOLUCION 0pRESOLUTION ----------------------------------------------------------------------------------------------------------------------
-DAT_RESOLUTION_SEASON_STATION <- read.table("../dataFiles/pares/INTERVALOh/ObsFct_Pairs_STATION_DAY_NUES_15.txt",sep = ",", header = TRUE, fill = FALSE)
+DAT_RESOLUTION_SEASON_STATION <- read.table("../dataFiles/pares/INTERVALO/ObsFct_Pairs_STATION_DAY_NUES_e_INTERVALO_15.txt",sep = ",", header = TRUE, fill = FALSE)
 OBS_RESOLUTION_SEASON_STATION <- DAT_RESOLUTION_SEASON_STATION$OBSERVACION
 FCT_RESOLUTION_SEASON_STATION <- DAT_RESOLUTION_SEASON_STATION$PRONOSTICO
 
