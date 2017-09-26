@@ -1,0 +1,13 @@
+#Load required libraries
+library(verification)
+
+#------- ESTACION STATION -----------------------------------------------------------------------------------------------------------------------------
+#--------RESOLUCION 0pRESOLUTION ----------------------------------------------------------------------------------------------------------------------
+DAT_STATION <- read.table("../dataFiles/pares/INTERVALO/monthlyPairs/STATION_mNUES.txt",sep = ",", header = TRUE, fill = FALSE)
+OBS_STATION <- DAT_STATION$OBSERVACION
+FCT_STATION <- DAT_STATION$PRONOSTICO
+
+#---------Estadisticas de verificacion-------------------------------------
+MOD_STATION <- verify(OBS_STATION,FCT_STATION, frcst.type = "cont", obs.type = "cont")
+
+summary(MOD_STATION)
