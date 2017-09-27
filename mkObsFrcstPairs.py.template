@@ -231,7 +231,7 @@ for line in pair_list:
 dates = pd.to_datetime(date_list)
 adcirc_forecast=[]
 observation=[]
-astronomial=[]
+astronomical=[]
 for value in pair_list:
     adcirc_forecast.append(value[4])
     observation.append(value[3])
