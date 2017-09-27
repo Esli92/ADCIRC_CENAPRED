@@ -90,7 +90,7 @@ do
 		
 		done
 	done
-	tail -2 taylor_tail.txt >> $TARGET
+	cat taylor_tail.txt >> $TARGET
 done
 
 echo "THE SCRIPTS ARE READY, FIND THEM IN ReadStation/taylor"
