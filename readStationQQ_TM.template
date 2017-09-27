@@ -1,0 +1,8 @@
+#------- ESTACION STATION -----------------------------------------------------------------------------------------------------------------------------
+DAT_RESOLUTION_SEASON_STATION <- read.table("../dataFiles/pares/INTERVALO/monthlyPairs/STATION_mSEASON.txt",sep = ",", header = TRUE, fill = FALSE)
+OBS_RESOLUTION_SEASON_STATION <- DAT_RESOLUTION_SEASON_STATION$OBSERVACION
+FCT_RESOLUTION_SEASON_STATION <- DAT_RESOLUTION_SEASON_STATION$PRONOSTICO
+#Diagrama QQ
+jpeg(file = "./plots/qq/SEASON_STATION_INTERVALO.jpg", width=850,height=750,units="px",quality=90)
+conditional_quantile(FCT_RESOLUTION_SEASON_STATION,OBS_RESOLUTION_SEASON_STATION, main = "Grafico Cuantil-Condicional ADCIRC, intervalo INTERVALO para la estacion STATION en el mes SEASON",ylab = "Valor Observado (m)", xlab = "Valor pronosticado (m)")
+dev.off()

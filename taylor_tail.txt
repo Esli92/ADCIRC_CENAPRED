@@ -1,0 +1,10 @@
+
+#Para todos los intervalos
+#legend(lpos,lposy,legend=c("0-24", "24-48", "48-72", "72-96", "96-120", "0-60", "60-120", "0-48", "96-120", "72-120", "0-120"),pch=c(17,17,17,17,17,17,17,17,17,17,17),col=c("red","blue","blueviolet","burlywood","cyan","gray","forestgreen","hotpink","orange","seagreen1","sienna"))
+#Primera y ultima mitad, con los 120 completos.
+#legend(lpos,lposy,legend=c("0-60", "60-120","0-120"),pch=c(17,17,17,17,17,17,17,17,17,17,17),col=c("gray","forestgreen","sienna"))
+#Primeras y ultimas 48 horas
+#legend(lpos,lposy,legend=c("0-48", "72-120"),pch=c(17,17,17,17,17,17,17,17,17,17,17),col=c("hotpink","seagreen1"))
+#Primeras y ultimas 24 horas
+legend(lpos,lposy,legend=c("0-24","72-120"),pch=c(17,17,17,17,17,17,17,17,17,17,17),col=c("red","orange"))
+dev.off()

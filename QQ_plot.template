@@ -1,0 +1,28 @@
+#Verification for seasons
+
+#This program for R takes verification-observation pair files from WRF forecasts and uses the verification R package to get statistics and plots. 
+#Programmer Oscar Jurado (ojurado@ciencias.unam.mx)
+#Creation date: 11-Sep-2016
+
+#------------------Requisites------------------------------------------------------------
+#WRF/observations pairs made with mkPairs.sh program.
+#The input file should be in 24h/0p5/RESOLUTION/
+#verification and plotrix packages must be installed.  
+
+
+#-----------------Version---------------------------------------------------------------
+#v1.0 11/Sep/16 Program is created
+#v2.0 Nov/16 Added Taylor diagrams with plotrix, improved labels on conditional quantile, translated to spanish
+
+#----------------Known issues-----------------------------------------------------------
+#for custom conditional.quantiles axis labels to work, the function must be modified to remove xlab and ylab.
+
+#-----------------Local directories----------------------------------------------------- 
+
+
+#-----------------BEGIN PROGRAM--------------------------------------------------------
+
+source("conditional_quantile.R")
+
+#Load required libraries
+library(verification)
