@@ -27,13 +27,13 @@ NODE=17521
 #FOR: ../dataFiles/pronosticos/timeSeries/2015/01/TimeSeries_pom_m_01_d_31_120h_25492_node.txt
 
 #Comenzamos con el anio que vamos a leer, que esta dentro del directorio validacion_ADCIRC
-for NODE in 24780 24781
+for NODE in 24780
 do
 
     for YEAR in `ls $DIR_FOR`
     do
         #Ahora necesitamos movernos entre los meses del anio
-        for MONTH in 10
+        for MONTH in 06
         do
             mkdir -p ${DIR_OUT}/${MONTH}
             #Y por ultimo nos movemos entre los dos dominios, gom y pom

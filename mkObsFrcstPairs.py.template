@@ -247,7 +247,7 @@ mean_astro_series = pd.DataFrame({'obs-mean' : observ_series - observ_series.mea
 
 mean_astro_series.plot()
 plt.ylabel('Elevacion (m)')
-figstr = '../figures/astro/ts_plot_d_{}_m_{}_node_{}.png'.format(wrf_day,wrf_month,adcirc_node)
+figstr = '../figures/astro/ts_plot_d_{}_m_{}_node_{}.png'.format(wrf_day+10,wrf_month,adcirc_node)
 plt.savefig(figstr)
 
 ############GET different pairs (24h, 48h, 120h, l24h, l48h, etc).
