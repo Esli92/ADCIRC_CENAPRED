@@ -189,7 +189,7 @@ wrf_day_sim = wrf_list[0:dfh]
 #Es momento ya de hacer el empalme entre archivos. Queremos que tengan el siguiente formato final:
 #MES DIA HORA OBSERVACION PRONOSTICO 
 
-pair_list_b = np.zeros((len(obs_hour_sim),5))
+pair_list_b = np.zeros((len(obs_hour_sim),6))
 pair_list = pair_list_b.tolist()
 
 w = 0
@@ -199,26 +199,27 @@ for line in obs_hour_sim:
 	pair_list[w][2] = line[3]
 	pair_list[w][3] = line[6]
 	pair_list[w][4] = wrf_day_sim[w][6]
+	pair_list[w][5] = line[7]
 	w = w + 1
 
 wrf_day = int(wrf_day)
 wrf_month = int(wrf_month)
 
 #Ahora escribimos esto a un archivo nuevo
-file_str = "../dataFiles/pares/120/ObsFct_Pairs_{}_{}_{}_e_{}_15.txt".format(adcirc_node,wrf_day+10,wrf_month,120)
+#file_str = "../dataFiles/pares/120/ObsFct_Pairs_{}_{}_{}_e_{}_15.txt".format(adcirc_node,wrf_day+10,wrf_month,120)
 
-#DEBUG_LINE:
-#file_str = "../dataFiles/pares/24h/ObsFct_Pairs_{}_{}_{}_{}_15.txt".format(var_name,wrf_station_name,wrf_day,wrf_month)
+##DEBUG_LINE:
+##file_str = "../dataFiles/pares/24h/ObsFct_Pairs_{}_{}_{}_{}_15.txt".format(var_name,wrf_station_name,wrf_day,wrf_month)
 
-pair_file = open(file_str,'w')
-mywriter = csv.writer(pair_file, delimiter=',')
+#pair_file = open(file_str,'w')
+#mywriter = csv.writer(pair_file, delimiter=',')
 
-header_str = ["MES","DIA","HORA","OBSERVACION","PRONOSTICO"]
-mywriter.writerow(header_str)
+#header_str = ["MES","DIA","HORA","OBSERVACION","PRONOSTICO"]
+#mywriter.writerow(header_str)
 
-for line in pair_list:
-	mywriter.writerow(line)
-pair_file.close()
+#for line in pair_list:
+	#mywriter.writerow(line)
+#pair_file.close()
 
 
 ##############TIME SERIES FOR PLOT SECTION###################################
@@ -230,14 +231,19 @@ for line in pair_list:
 dates = pd.to_datetime(date_list)
 adcirc_forecast=[]
 observation=[]
+astronomial=[]
 for value in pair_list:
     adcirc_forecast.append(value[4])
     observation.append(value[3])
+    astronomical.append(value[5])
     
 adcirc_series = pd.Series(adcirc_forecast, index=dates)
 observ_series = pd.Series(observation,index=dates)
+astro_series = pd.Series(astronomical,index=dates)
+
 joint_series = pd.DataFrame({'obs' : observ_series,'adc' : adcirc_series})
 mean_series = pd.DataFrame({'obs-mean' : observ_series - observ_series.mean(),'adcirc-mean' : adcirc_series - adcirc_series.mean()})
+mean_astro_series = pd.DataFrame({'obs-mean' : observ_series - observ_series.mean(),'adcirc-mean' : adcirc_series - adcirc_series.mean(),'astro-mean' : astro_series - astro_series.mean()})
 
 #mean_series.plot()
 #plt.ylabel('Elevacion (m)')
@@ -276,5 +282,10 @@ cut_series.to_csv(namestr,sep=',',na_rep='nan',date_format='%m,%d,%H',header=Fal
 
 cut_series = mean_series[72:120]
 namestr = "../dataFiles/pares/{}/ObsFct_Pairs_{}_{}_{}_e_{}_15.txt".format('72',adcirc_node,wrf_day+10,wrf_month,'72')
+copyfile('pairHead',namestr)
+cut_series.to_csv(namestr,sep=',',na_rep='nan',date_format='%m,%d,%H',header=False,quotechar=' ',mode='a')
+
+cut_series = mean_series
+namestr = "../dataFiles/pares/{}/ObsFct_Pairs_{}_{}_{}_e_{}_15.txt".format('120',adcirc_node,wrf_day+10,wrf_month,'120')
 copyfile('pairHead',namestr)
 cut_series.to_csv(namestr,sep=',',na_rep='nan',date_format='%m,%d,%H',header=False,quotechar=' ',mode='a')
