@@ -8,7 +8,7 @@ echo 'BULK PAIRS ALL V2.0 -----> Indica los siguientes datos'
 
 
 
-DIRECTORIO_ESTACIONES=../dataFiles/estaciones
+DIRECTORIO_ESTACIONES=../dataFiles/estaciones_chidas    
 DIRECTORIO_MESES=./fechas/months
 
 for MES in `ls $DIRECTORIO_MESES`
@@ -30,7 +30,7 @@ do
 		#VARIABLE=TM
 		for ESTACION in `ls $DIRECTORIO_ESTACIONES`
 		do
-				rm ${PAIR_FILES}/${ESTACION}_m${MES}.txt 
+				#rm ${PAIR_FILES}/${ESTACION}_m${MES}.txt 
 
 				head -1 ${HEADER_SAMPLE} > ${PAIR_FILES}/${ESTACION}_m${MES}.txt; tail -n +2 -q ${PAIR_FILES}/ObsFct_Pairs_${ESTACION}_??_${MES}_e_${INTERVALO}_*  >> ${PAIR_FILES}/${ESTACION}_m${MES}.txt
 

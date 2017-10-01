@@ -23,6 +23,9 @@ DIRECTORIO_DIAS=./fechas/days
 DIRECTORIO_MESES_SIM=meses_sim
 DIR_FOR=../dataFiles/pronosticos/timeSeries
 
+mkdir -p plots/out
+mkdir -p plots/qq
+rm *.Rout
 
 figlet QQ PLOTS
 

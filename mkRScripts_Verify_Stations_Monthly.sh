@@ -15,7 +15,7 @@
 
 
 #----------------Directorios Locales, cambiar si es necesario----------------------------
-DIRECTORIO_ESTACIONES=../dataFiles/estaciones
+DIRECTORIO_ESTACIONES=../dataFiles/estaciones_chidas
 DIRECTORIO_MESES=./fechas/months
 DIRECTORIO_DIAS=./fechas/days
 DIRECTORIO_MESES_SIM=meses_sim
@@ -39,7 +39,7 @@ then
 	mkdir verify_monthly/${INTERVALO}
 fi
 
-rm -rf verify_monthly/${INTERVALO}/*
+rm verify_monthly/${INTERVALO}/*
 
 for YEAR in `ls $DIR_FOR`
 do

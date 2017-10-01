@@ -15,7 +15,7 @@
 
 
 #----------------Directorios Locales, cambiar si es necesario----------------------------
-DIRECTORIO_ESTACIONES=../dataFiles/estaciones
+DIRECTORIO_ESTACIONES=../dataFiles/estaciones_chidas
 DIRECTORIO_MESES=./fechas/months
 DIRECTORIO_DIAS=./fechas/days
 DIRECTORIO_MESES_SIM=meses_sim
