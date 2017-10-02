@@ -26,7 +26,7 @@ NODE=17521
 #En este caso particular los archivos tienen este camino:
 #OBS: ../dataFiles/observaciones/2015/fixed/NODE.txt
 #FOR: ../dataFiles/pronosticos/timeSeries/2015/01/TimeSeries_pom_m_01_d_31_120h_25492_node.txt
-
+find ../dataFiles/pares -name "*.txt" -exec rm {} \; 
 #Comenzamos con el anio que vamos a leer, que esta dentro del directorio validacion_ADCIRC
 for NODE in `ls $DIR_ESTACIONES`
 do
