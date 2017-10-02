@@ -1,0 +1,77 @@
+Uso de paqueteria ADCIRC-Validacion Mareografico
+
+MANUAL DE USUARIO
+
+---------DATOS INICIALES-----------------
+
+Para usar el paquete se requieren dos bases de datos:
+1) Resultados de la simulación de ADCIRC (En este caso se asume que son fort.63.nc en NetCDF). Para propositos partículares de la paqueteria, 
+las simulaciones contienen 120 horas de pronóstico y salen todos los días por un año.
+2) Datos de observaciones de estaciones mareograficas. En este caso se usaron datos provenientes del servicio mareografico nacional mexicano, los
+cuales tenian un formato particular. Si fuera necesario el formato se puede cambiar en el programa de fixObservationDates.py
+
+PASOS y PROGRAMAS
+
+I) Correr el programa bulkFixObservations.sh, que es un wrapper de fixObservationDates.py, para homogeneizar las series de tiempo de las observaciones.
+Input=Observaciones del mareografico, en ../dataFiles/observaciones/pares/2015/preproc  
+Output=Series de tiempo con observacion y valor pronosticado en ../dataFiles/observaciones/pares/2015/fixed (se les cambio el nombre para tener el numero de nodo).
+
+II) Correr el programa bulkTimeSeries.sh (wrapper de makeTimeSeries.py) para convertir las salidas del modelo (fort.63.nc) en series de tiempo para cada estacion. Las estaciones estan definidas
+por numero de nodo en el programa makeTimeSeries.py.
+Input=Salidas del modelo definidas en el programa bulkTimeSeries.sh
+Output=Series de tiempo en ../dataFiles/pronosticos/TimeSeries/2015/
+
+III)Correr el programa bulkPairsPlots.sh (wrapper de mkObsFrcstPairs.py) que toma las series de tiempo de observaciones y pronosticos y genera un solo archivo empalmando
+los dos, de acuerdo a diferentes intervalos de horas definidos.
+Input=Series de tiempo en ../dataFiles/pronosticos/TimeSeries/2015 y ../dataFiles/observaciones/pares/2015/fixed
+Output=Pares de series en ../dataFiles/pares/${INTERVALO} 
+
+IV)Correr el programa mkMonthPairsFile_IndStations.sh el cual toma los archivos de pares de series de cada intervalo y los une para tener un archivo (por intervalo) por
+mes (es decir, un archivo de primeras 24 horas para todo enero, otro de ultimas 48 horas para enero, etc). 
+Input=Pares de series en ../dataFiles/pares/${INTERVALO} 
+Output=Pares de series para todo el mes en ../dataFiles/pares/${INTERVALO}/monthlyPairs
+
+V)Generar los scripts de R necesarios para hacer la verificación de los pares diarios (no los mensuales). Para generar los scripts correr el programa 
+mkRScripts_Verify_Stations_Daily_120h.sh en donde se pueden cambiar las estaciones a usar para la verificacion.
+Input=ninguno en particular.
+Output=verify_daily/${INTERVALO}/R_scriptline_?_.R
+
+VI)Ejecutar los scripts de R que habian sido generados corriendo el script execRScripts_Verif_Daily.sh 
+Input=scripts en verify_daily/${INTERVALO}/R_scriptline_?.R y pares en ../dataFiles/pares/${INTERVALO}
+Output=Resultados de los scripts con terminacion .Rout en verify_daily/${INTERVALO}/out 
+
+VII)Generar los scripts de R necesarios para hacer la verificación de los pares mensuales. Para generar los scripts correr el programa mkRScripts_Verify_Stations_Monthly.sh en donde se pueden cambiar las estaciones a usar para la verificacion
+Input=ninguno en particular.
+Output=verify_monthly/${INTERVALO}/R_scriptline_?_.R
+
+VIII)Ejecutar los scripts de R que habian sido generados corriendo el script execRScripts_Verif_Monthly.sh 
+Input=scripts en verify_monthly/${INTERVALO}/R_scriptline_?.R y pares en ../dataFiles/pares/${INTERVALO}/monthlyPairs
+Output=Resultados de los scripts con terminacion .Rout en verify_monthly/${INTERVALO}/out 
+
+IX)Generar archivos csv a partir de los resultados de la verificacion mensual corriendo el programa mkCSVErrors_Stations_Monthly.sh
+este programa genera archivos csv individuales para cada estacion que contienen el valor del estadistico para cada mes.
+Input=Resultados de los scripts con terminacion .Rout en verify_monthly/${INTERVALO}/out 
+Output=archivos csv para cada estadistico para cada estacion en verify_monthly/${INTERVALO}/csv
+
+X)Generar archivos csv de cada estadistico que contienen todas las estaciones (y todos los meses) corriendo el programa 
+mkCSVErrors_Monthly.sh 
+Input=archivos csv para cada estadistico para cada estacion en verify_monthly/${INTERVALO}/csv
+Output=archivos csv para cada estadistico en verify_monthly/${INTERVALO}/stats
+
+XI)Graficar el valor de los estadisticos a lo largo del año corriendo el programa bulkPlotMonthlyAllStats.sh 
+Input=archivos csv para cada estadistico en verify_monthly/${INTERVALO}/stats
+Output=Graficos para cada estadistico de cada intervalo en ../figures/stats_all
+
+XII)Generar los scripts de R necesarios para hacer diagramas de Taylor con los estadisticos mensuales, corriendo el programa
+mkRScripts_Taylor_Monthly.sh
+Input=ninguno en particular
+Output=scripts para correr en readStation/taylor/R_scriptline_?.R y diagramas de Taylor en plots/taylor
+
+XIII)Generar los scripts de R necesarios para hacer diagramas QQ con los estadisticos mensuales, corriendo el programa
+mkRScripts_QQ_Stations_Monthly.sh
+Input=ninguno en particular
+Output=scripts para correr en readStation/qq/R_scriptline_?.R
+
+XIV)Ejecutar los scripts para obtener los diagramas QQ corriendo mkRunRScripts_QQ.sh
+Input=scripts para correr en readStation/qq/R_scriptline_?.R
+Output=
