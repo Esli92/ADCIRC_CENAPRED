@@ -22,8 +22,9 @@ DIRECTORIO_SCRIPTS=`pwd`
 DIRECTORIO_SEASONS=./season_months
 TARGET_DIR=verify_daily/${INTERVALO}/out
 
-DIRECTORIO_ESTACIONES=../dataFiles/estaciones
-DIRECTORIO_MESES=./fechas/months
+DIRECTORIO_ESTACIONES=../dataFiles/estaciones_chidas
+DIRECTORIO_MESES=./fechas/monthszero
+DIRECTORIO_MESES2=./fechas/months
 DIRECTORIO_DIAS=./fechas/days
 DIRECTORIO_MESES_SIM=meses_sim
 INTERVALO=120
@@ -33,51 +34,59 @@ INTERVALO=120
 #Example of result directory
 #verify_daily/${INTERVALO}/out/${VARIABLE}/${MES}
 
+for INTERVALO in 02
+do
+
 rm *.out 
 rm verify_daily/${INTERVALO}/out/*.csv 
-
+mkdir -p verify_daily/${INTERVALO}/csv 
+rm  verify_daily/${INTERVALO}/csv/*
 	#VARIABLE=WS
 	
 		for MES in `ls $DIRECTORIO_MESES`
 		do
+            for MONTH in `ls $DIRECTORIO_MESES2`
+            do
 			#head -1 csv_daily_header.txt > MAE_${RESOLUTION}_${MES}_${VARIABLE}.csv
 			#head -1 csv_daily_header.txt > ME_${RESOLUTION}_${MES}_${VARIABLE}.csv
 			#head -1 csv_daily_header.txt > MSE_${RESOLUTION}_${MES}_${VARIABLE}.csv
 			for STATION in `ls $DIRECTORIO_ESTACIONES`
 			do
-				for DAY in `ls $DIRECTORIO_DIAS`
+				for DAY in `ls ../dataFiles/pares/02/ObsFct_Pairs_24780_??_${MONTH}_e_02_15.txt | awk -F'_' '{print $4}'`
 				do
 				
 					TARGET=verify_daily/${INTERVALO}/out/R_scriptLines_${MES}_${DAY}_${STATION}.Rout
+					
 					if grep -Fq "MAE               =" $TARGET
 					then
 						grep -F "MAE               =" $TARGET > MAE_${MES}_${DAY}.out
-						awk -F' ' -v OFS=',' -v DAY=$DAY '$3==($3+0) {print $3,DAY}' MAE_${MES}_${DAY}.out >> verify_daily/${INTERVALO}/out/MAE_${MES}_${STATION}.csv
+						awk -F' ' -v OFS=',' -v DAY=$DAY '$3==($3+0) {print $3,DAY}' MAE_${MES}_${DAY}.out >> verify_daily/${INTERVALO}/csv/MAE_${MES}_${STATION}.csv
 					else
-						echo "NaN,$DAY" >> verify_daily/${INTERVALO}/out/MAE_${MES}_${STATION}.csv
+						echo "NaN,$DAY" >> verify_daily/${INTERVALO}/csv/MAE_${MES}_${STATION}.csv
 					fi
 
 					if grep -Fq "ME                =" $TARGET
 					then
 						grep -F "ME                =" $TARGET > ME_${MES}_${DAY}.out
-						awk -F' ' -v OFS=',' -v DAY=$DAY '$3==($3+0) {print $3,DAY}' ME_${MES}_${DAY}.out >> verify_daily/${INTERVALO}/out/ME_${MES}_${STATION}.csv
+						awk -F' ' -v OFS=',' -v DAY=$DAY '$3==($3+0) {print $3,DAY}' ME_${MES}_${DAY}.out >> verify_daily/${INTERVALO}/csv/ME_${MES}_${STATION}.csv
 					else
-						echo "NaN,$DAY" >> verify_daily/${INTERVALO}/out/ME_${MES}_${STATION}.csv
+						echo "NaN,$DAY" >> verify_daily/${INTERVALO}/csv/ME_${MES}_${STATION}.csv
 					fi
 	
 					if grep -Fq "MSE               =" $TARGET
 					then
 						grep -F "MSE               =" $TARGET > MSE_${MES}_${DAY}.out
-						awk -F' ' -v OFS=',' -v DAY=$DAY '$3==($3+0) {print $3,DAY}' MSE_${MES}_${DAY}.out >> verify_daily/${INTERVALO}/out/MSE_${MES}_${STATION}.csv
+						awk -F' ' -v OFS=',' -v DAY=$DAY '$3==($3+0) {print $3,DAY}' MSE_${MES}_${DAY}.out >> verify_daily/${INTERVALO}/csv/MSE_${MES}_${STATION}.csv
 					else
-						echo "NaN,$DAY" >> verify_daily/${INTERVALO}/out/MSE_${MES}_${STATION}.csv
+						echo "NaN,$DAY" >> verify_daily/${INTERVALO}/csv/MSE_${MES}_${STATION}.csv
 					fi
 				done
 			done
 		done
+    done
+done
 
-
-rm *.out
+#rm *.out
 
 # 
 # #############-----------------------------ADDING MONTHS FOR DIFFERENT SEASONS-----------------------------------------------------------------------------------

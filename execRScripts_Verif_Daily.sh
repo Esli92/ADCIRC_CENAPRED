@@ -25,6 +25,7 @@ DIR_FOR=../dataFiles/pronosticos/timeSeries
 INTERVALO=120
 DOMAIN=pom
 
+rm *.Rout
 #for INTERVALO in 02 24 47 79 91 06 61 48 96 72 120
 for INTERVALO in 02
 do
