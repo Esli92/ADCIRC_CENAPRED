@@ -52,7 +52,7 @@ times = time[:]
 dates = nc.num2date(time[:],units=time.units,calendar='standard')
 #Start loop for each node
 for node in nodes:
-    zeta_node = zeta[:,node]
+    zeta_node = zeta[:,node-1]
     #Print the file
     filename = '/LUSTRE/ID/ADCIRC/TimeSeries2015/12/TimeSeries_pom_m_12_d_29_120h_{}_node.txt'.format(node)
     o_file = open(filename,'w')
