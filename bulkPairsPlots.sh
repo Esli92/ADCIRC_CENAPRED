@@ -22,7 +22,7 @@ DIR_SCRIPT=`pwd`
 DIR_FOR=../dataFiles/pronosticos/timeSeries
 DIR_OUT=../dataFiles/pares/
 DIR_ESTACIONES=../dataFiles/estaciones_chidas
-NODE=17521
+
 #En este caso particular los archivos tienen este camino:
 #OBS: ../dataFiles/observaciones/2015/fixed/NODE.txt
 #FOR: ../dataFiles/pronosticos/timeSeries/2015/01/TimeSeries_pom_m_01_d_31_120h_25492_node.txt
