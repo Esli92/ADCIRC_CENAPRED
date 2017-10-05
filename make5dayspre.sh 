@@ -1,0 +1,15 @@
+
+DIRECTORIO_FECHAS=./fechas 
+
+for FILE in `ls $DIRECTORIO_FECHAS`
+do
+    source $DIRECTORIO_FECHAS/$FILE
+    FECHA=${AI}-${MI}-${DI}
+    FECHA_PRE=`date -d "${FECHA} - 5  days" +%Y-%m-%d`
+    AP=`date -d "${FECHA} - 5  days" +%Y`
+    MP=`date -d "${FECHA} - 5  days" +%m`
+    DP=`date -d "${FECHA} - 5  days" +%d`
+    echo $AP >> $DIRECTORIO_FECHAS/$FILE
+    echo $MP >> $DIRECTORIO_FECHAS/$FILE
+    echo $DP >> $DIRECTORIO_FECHAS/$FILE
+done
