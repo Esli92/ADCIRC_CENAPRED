@@ -48,7 +48,7 @@ n_nodes = len(ncfile.dimensions["node"])
 
 nodes = [25350,23758,24780,21593,19545,19564,17522,17615,17624,21037,18734]
 
-times = time[:]
+times = time[:]-432000
 dates = nc.num2date(time[:],units=time.units,calendar='standard')
 #Start loop for each node
 for node in nodes:
