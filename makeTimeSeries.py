@@ -27,7 +27,7 @@ import numpy.ma as ma
 
 #We start by loading the ncfile, with reading permissions to avoid changing anything.
 
-ncfile = nc.Dataset("/LUSTRE/ID/validacion_ADCIRC/2015/12/pom/pom-2015-12-29-120h-fort.63.nc","r",format="NETCDF4")
+ncfile = nc.Dataset("/LUSTRE/ID/validacion_ADCIRC/2015/10/pom/pom-2015-10-31-120h-fort.63.nc","r",format="NETCDF4")
 
 #We can now get the variables needed, u10, v10 and MSLP.
 
@@ -46,7 +46,7 @@ n_nodes = len(ncfile.dimensions["node"])
 
 #Declare the nodes to get a time series from (list)
 
-nodes = [25492,25493,25599,25350,21593,21594,21592,21591,23758,23757,23756,23759,17614,17615,17613,17612,19701,19702,19703,19701,24780,24781,24658,24547,21036,21037,21038,21035,19563,19564,19565,19562,17521,17522,17520,17523,17624,17623,17625,17622,19544,19543,19545,19546]
+nodes = [25350,23758,24780,21593,19545,19564,17522,17615,17624,21037,18734]
 
 times = time[:]
 dates = nc.num2date(time[:],units=time.units,calendar='standard')
@@ -54,7 +54,7 @@ dates = nc.num2date(time[:],units=time.units,calendar='standard')
 for node in nodes:
     zeta_node = zeta[:,node-1]
     #Print the file
-    filename = '/LUSTRE/ID/ADCIRC/TimeSeries2015/12/TimeSeries_pom_m_12_d_29_120h_{}_node.txt'.format(node)
+    filename = '/LUSTRE/ID/ADCIRC/TimeSeries2015/10/TimeSeries_pom_m_10_d_31_120h_{}_node.txt'.format(node)
     o_file = open(filename,'w')
     for tim in range(n_tim):
         if zeta_node[tim] is ma.masked:
