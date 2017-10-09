@@ -30,8 +30,8 @@ DIR_OUT=/LUSTRE/ID/ADCIRC/TimeSeries2015
 for YEAR in 2015
 do
     #Ahora necesitamos movernos entre los meses del anio
-    #for MONTH in `ls $DIR_ADCIRC/$YEAR`
-    for MONTH in 02 10
+    for MONTH in `ls $DIR_ADCIRC/$YEAR`
+    #for MONTH in 02 10
     do
         mkdir -p ${DIR_OUT}/${MONTH}
         #Y por ultimo nos movemos entre los dos dominios, gom y pom

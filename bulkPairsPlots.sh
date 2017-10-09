@@ -35,6 +35,7 @@ do
     do
         #Ahora necesitamos movernos entre los meses del anio
         for MONTH in `ls $DIR_FOR/$YEAR`
+        #for MONTH in 01 02 03 10
         do
             #mkdir -p ${DIR_OUT}/${MONTH}
             #Y por ultimo nos movemos entre los dos dominios, gom y pom
