@@ -27,7 +27,7 @@ DIR_OUT=../dataFiles/observaciones/2015/fixed/
 
 #Comenzamos con el anio que vamos a leer, que esta dentro del directorio validacion_ADCIRC
 
-for STATION in acapulco angel chiapas huatulco lazaro mazatlan salina vallarta zihuatanejo acapulco angel
+for STATION in campeche celestun frontera islamujeres morelos progreso sisal telchac tuxpan veracruz
 do
     for YEAR in 2015
     do
