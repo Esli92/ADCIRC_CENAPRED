@@ -8,7 +8,7 @@ echo 'BULK PAIRS ALL V2.0 -----> Indica los siguientes datos'
 
 
 
-DIRECTORIO_ESTACIONES=../dataFiles/estaciones_chidas    
+DIRECTORIO_ESTACIONES=../dataFiles/estaciones_gom    
 DIRECTORIO_MESES=./fechas/months
 
 for MES in `ls $DIRECTORIO_MESES`
@@ -19,9 +19,9 @@ do
 
 		PAIR_FILES=../dataFiles/pares/${INTERVALO}
 
-		if [ ! -d "${PAIR_FILES}/monthlyPairs" ]
+		if [ ! -d "${PAIR_FILES}/monthlyPairs/gom" ]
 		then
-			mkdir ${PAIR_FILES}/monthlyPairs
+			mkdir -p ${PAIR_FILES}/monthlyPairs/gom
 		fi	
 
 		HEADER_SAMPLE=pairHead
@@ -36,7 +36,7 @@ do
 
 				#awk 'BEGIN { FS = "," }; $4 != -99 {print $1","$2","$3","$4","$5}' ${PAIR_FILES}/${ESTACION}_${VARIABLE}_m${MES}.pre >> ${PAIR_FILES}/${ESTACION}_${VARIABLE}_m${MES}.txt
 
-				mv ${PAIR_FILES}/${ESTACION}_m${MES}.txt ${PAIR_FILES}/monthlyPairs
+				mv ${PAIR_FILES}/${ESTACION}_m${MES}.txt ${PAIR_FILES}/monthlyPairs/gom
 				#rm ${PAIR_FILES}/${ESTACION}_${VARIABLE}_m${MES}.pre
 		done
 

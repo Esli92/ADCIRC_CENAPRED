@@ -37,34 +37,35 @@ for intervalo in intervalos:
 
     for mes in range(1,13):
         
-        bias_file_str = "verify_monthly/{}/stats/bias_m_{}.txt".format(intervalo,mes)
+        bias_file_str = "verify_monthly/{}/stats/pom/bias_m_{}.txt".format(intervalo,mes)
         bias_file = open(bias_file_str, 'w')
         bias_file.write("station,BIAS")
         bias_file.write("\n")
         
-        rmse_file_str = "verify_monthly/{}/stats/rmse_m_{}.txt".format(intervalo,mes)
+        rmse_file_str = "verify_monthly/{}/stats/pom/rmse_m_{}.txt".format(intervalo,mes)
         rmse_file = open(rmse_file_str, 'w')
         rmse_file.write("station,RMSE")
         rmse_file.write("\n")
         
-        rmsedb_file_str = "verify_monthly/{}/stats/rmsedb_m_{}.txt".format(intervalo,mes)
+        rmsedb_file_str = "verify_monthly/{}/stats/pom/rmsedb_m_{}.txt".format(intervalo,mes)
         rmsedb_file = open(rmsedb_file_str, 'w')
         rmsedb_file.write("station,RMSEdb")
         rmsedb_file.write("\n")
         
-        corr_file_str = "verify_monthly/{}/stats/corr_m_{}.txt".format(intervalo,mes)
+        corr_file_str = "verify_monthly/{}/stats/pom/corr_m_{}.txt".format(intervalo,mes)
         corr_file = open(corr_file_str, 'w')
         corr_file.write("station,Pearson")
         corr_file.write("\n")
         
-        ioa_file_str = "verify_monthly/{}/stats/ioa_m_{}.txt".format(intervalo,mes)
+        ioa_file_str = "verify_monthly/{}/stats/pom/ioa_m_{}.txt".format(intervalo,mes)
         ioa_file = open(ioa_file_str, 'w')
         ioa_file.write("station,IOA")
         ioa_file.write("\n")
         
+        #for station in [11129,19881,40273,44732]:
         for station in [17522,17615,17624,18734,19545,19564,21037,23758,24780]:
 
-            tsfile='../dataFiles/pares/{}/monthlyPairs/{}_m{}.txt'.format(intervalo,station,mes)
+            tsfile='../dataFiles/pares/{}/monthlyPairs/pom/{}_m{}.txt'.format(intervalo,station,mes)
 
             df = pd.read_csv(tsfile,sep=',',parse_dates=[[0,1,2]])
 
@@ -81,8 +82,8 @@ for intervalo in intervalos:
             #for IOA
             obs_mean = df['observacion'].mean()
             df['obs-mean'] = df['observacion']-df['observacion'].mean()
-            sum_obs_mean = abs(sum(df['obs-mean'])) 
-            sum_mod_obs = abs(sum(df['mod-obs']))
+            sum_obs_mean = sum(abs(df['obs-mean'])) 
+            sum_mod_obs = sum(abs(df['mod-obs']))
             c = 2
 
             if sum_mod_obs <= (c * sum_obs_mean):

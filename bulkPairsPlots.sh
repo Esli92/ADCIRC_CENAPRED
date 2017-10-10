@@ -26,7 +26,7 @@ DIR_ESTACIONES=../dataFiles/estaciones_chidas
 #En este caso particular los archivos tienen este camino:
 #OBS: ../dataFiles/observaciones/2015/fixed/NODE.txt
 #FOR: ../dataFiles/pronosticos/timeSeries/2015/01/TimeSeries_pom_m_01_d_31_120h_25492_node.txt
-find ../dataFiles/pares -name "*.txt" -exec rm {} \; 
+#find ../dataFiles/pares -name "*.txt" -exec rm {} \; 
 #Comenzamos con el anio que vamos a leer, que esta dentro del directorio validacion_ADCIRC
 for NODE in `ls $DIR_ESTACIONES`
 do
@@ -35,7 +35,7 @@ do
     do
         #Ahora necesitamos movernos entre los meses del anio
         for MONTH in `ls $DIR_FOR/$YEAR`
-        #for MONTH in 01 02 03 10
+        #for MONTH in 02 10
         do
             #mkdir -p ${DIR_OUT}/${MONTH}
             #Y por ultimo nos movemos entre los dos dominios, gom y pom
@@ -45,14 +45,16 @@ do
                 for DAY in `ls $DIR_FOR/$YEAR/$MONTH/TimeSeries_${DOMAIN}_*_${NODE}_node.txt | awk -F'_' '{print $6}'`
                 do
                     FILENAME=TimeSeries_${DOMAIN}_m_${MONTH}_d_${DAY}_120h_${NODE}_node.txt
-                    OBSFILE=${DIR_OBS}/${NODE}.txt
-                    #Aqui es donde empieza lo bueno, modificar el template para usarlo. 
-                    #El primer paso es cambiar el nombre del archivo a usar
-                    sed 's:'FILENAME':'$DIR_FOR/$YEAR/$MONTH/$FILENAME':g' mkObsFrcstPairs.py.template > mkPairs.py.pre
-                    sed 's:'ESTATTITTON':'$NAME':g' mkPairs.py.pre > mkPairs.py2.pre
-                    sed 's:'OBSERVATIONFILE':'$OBSFILE':g' mkPairs.py2.pre > mkPairs.py
-                    python mkPairs.py               
-                    rm *.pre 
+
+                        OBSFILE=${DIR_OBS}/${NODE}.txt
+                        #Aqui es donde empieza lo bueno, modificar el template para usarlo. 
+                        #El primer paso es cambiar el nombre del archivo a usar
+                        sed 's:'FILENAME':'$DIR_FOR/$YEAR/$MONTH/$FILENAME':g' mkObsFrcstPairs.py.template > mkPairs.py.pre
+                        sed 's:'ESTATTITTON':'$NAME':g' mkPairs.py.pre > mkPairs.py2.pre
+                        sed 's:'OBSERVATIONFILE':'$OBSFILE':g' mkPairs.py2.pre > mkPairs.py
+                        python mkPairs.py               
+                        rm *.pre 
+
                 done
             done
         done

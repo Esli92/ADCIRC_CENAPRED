@@ -12,8 +12,8 @@ import matplotlib.pyplot as plt
 cl_line = sys.argv
 
 #Lineas usadas en el debug 
-OBS_file_name = '../dataFiles/observaciones/2015/angel_obs.txt'
-FOR_file_name = '../dataFiles/observaciones/2015/angel_marpron.txt'
+OBS_file_name = '../dataFiles/observaciones/2015/zihuatanejo_obs.txt'
+FOR_file_name = '../dataFiles/observaciones/2015/zihuatanejo_marpron.txt'
 
 #OBS_file_name = cl_line[1]
 #WRF_file_name = cl_line[2]
@@ -61,7 +61,7 @@ end_date = datetime(2015,12,31,23,0,0)
 dates_full = pd.date_range(start_date,end_date,freq='H')
 
 #Now "resample" the time series so it has the same lenght as the previously made date range list. 
-elev_series = elev_series_original.reindex(dates_full)
+elev_series = elev_series_original.reindex(dates_full,fill_value='NaN',method=None)
 
 #This section is optional, only to find out how many nan values there are in the time series. 
 test = pd.isnull(elev_series)
@@ -71,7 +71,7 @@ for i in test:
         indx = indx +  1
 
 #This section fills the nan values with the closest existing value backwards. (Or as it's called, the forward method).
-elev_series = elev_series.fillna(method='pad')
+#elev_series = elev_series.fillna(method='pad')
 
 
 ######################FORECAST SECTION#####################################################
@@ -106,7 +106,7 @@ end_date = datetime(2015,12,31,23,0,0)
 dates_full = pd.date_range(start_date,end_date,freq='H')
 
 #Now "resample" the time series so it has the same lenght as the previously made date range list. 
-fore_series = fore_series_original.reindex(dates_full)
+fore_series = fore_series_original.reindex(dates_full,fill_value='NaN',method=None)
 
 #This section is optional, only to find out how many nan values there are in the time series. 
 test = pd.isnull(fore_series)
@@ -116,7 +116,7 @@ for i in test:
         indx2 = indx2 +  1
 
 #This section fills the nan values with the closest existing value backwards. (Or as it's called, the forward method).
-fore_series = fore_series.fillna(method='pad')
+#fore_series = fore_series.fillna(method='pad')
 
 
 ###############################JOINING TIME SERIES##########################################################
@@ -125,7 +125,7 @@ fore_series = fore_series.fillna(method='pad')
 pronobsts = pd.DataFrame({'mar_astr' : fore_series,'elev_obs' : elev_series})
 
 #Print to CSV file.
-pronobsts.to_csv('../dataFiles/observaciones/2015/fixed//angel.txt',sep=' ',na_rep='nan',date_format='%Y-%m-%d %H %M %S',index_label='date',quotechar=' ')
+pronobsts.to_csv('../dataFiles/observaciones/2015/fixed/zihuatanejo.txt',sep=' ',na_rep='nan',date_format='%Y-%m-%d %H %M %S',index_label='date',quotechar=' ')
 #pronobsts.plot()
 #plt.show()
 
