@@ -21,7 +21,8 @@ DIR_OBS=../dataFiles/observaciones/2015/fixed
 DIR_SCRIPT=`pwd`
 DIR_FOR=../dataFiles/pronosticos/timeSeries
 DIR_OUT=../dataFiles/pares/
-DIR_ESTACIONES=../dataFiles/estaciones_chidas
+#DIR_ESTACIONES=../dataFiles/estaciones_chidas
+DIR_ESTACIONES=../dataFiles/estacion_vall
 
 #En este caso particular los archivos tienen este camino:
 #OBS: ../dataFiles/observaciones/2015/fixed/NODE.txt
@@ -35,7 +36,7 @@ do
     do
         #Ahora necesitamos movernos entre los meses del anio
         for MONTH in `ls $DIR_FOR/$YEAR`
-        #for MONTH in 02 10
+        #for MONTH in 01
         do
             #mkdir -p ${DIR_OUT}/${MONTH}
             #Y por ultimo nos movemos entre los dos dominios, gom y pom

@@ -1,10 +1,12 @@
 
 #Para todos los intervalos
-#legend(lpos,lposy,legend=c("0-24", "24-48", "48-72", "72-96", "96-120", "0-60", "60-120", "0-48", "96-120", "72-120", "0-120"),pch=c(17,17,17,17,17,17,17,17,17,17,17),col=c("red","blue","blueviolet","burlywood","cyan","gray","forestgreen","hotpink","orange","seagreen1","sienna"))
+#legend(lpos,lposy,legend=c("1-24", "24-48", "48-72", "72-96", "97-120", "0-60", "60-120", "0-48", "97-120", "72-120", "0-120"),pch=c(17,17,17,17,17,17,17,17,17,17,17),col=c("red","blue","blueviolet","burlywood","cyan","gray","forestgreen","hotpink","orange","seagreen1","sienna"))
 #Primera y ultima mitad, con los 120 completos.
 #legend(lpos,lposy,legend=c("0-60", "60-120","0-120"),pch=c(17,17,17,17,17,17,17,17,17,17,17),col=c("gray","forestgreen","sienna"))
 #Primeras y ultimas 48 horas
-legend(lpos,lposy,legend=c("0-48", "72-120"),pch=c(17,17,17,17,17,17,17,17,17,17,17),col=c("hotpink","seagreen1"))
+#legend(lpos,lposy,legend=c("0-48", "72-120"),pch=c(17,17,17,17,17,17,17,17,17,17,17),col=c("hotpink","seagreen1"))
 #Primeras y ultimas 24 horas
-legend(lpos,lposy,legend=c("0-24","72-120"),pch=c(17,17,17,17,17,17,17,17,17,17,17),col=c("red","orange"))
+legend(lpos,lposy,legend=c("Acapulco 1-24","Pto Angel 1-24","Huatulco 1-24","Lzo Cardnas 1-24","Sal Cruz 1-24","Mazatlan 1-24","Pto Vallarta 1-24","Acapulco 97-120","Pto Angel 97-120","Huatulco 97-120","Lzo Cardnas 97-120","Sal Cruz 97-120","Mazatlan 97-120","Pto Vallarta 97-120"),pch=c(15,16,17,18,19,15,16,15,16,17,18,19,15,16),col=c("red","red","red","red","red","red","red","orange","orange","orange","orange","orange","orange","orange"))
+#dev.off()
+#legend(lpos,lposy,legend=c("Tuxpan 1-24","Veracruz 1-24","Frontera 1-24","Progreso 1-24","Telchac 1-24","Pto Morelos 1-24","Isla Mujeres 1-24","Tuxpan 97-120","Veracruz 97-120","Frontera 97-120","Progreso 97-120","Telchac 97-120","Pto Morelos 97-120","Isla Mujeres 97-120"),pch=c(15,16,17,18,19,15,16,15,16,17,18,19,15,16),col=c("red","red","red","red","red","red","red","orange","orange","orange","orange","orange","orange","orange"))
 dev.off()

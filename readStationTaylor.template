@@ -1,5 +1,5 @@
 #------- ESTACION STATION -----------------------------------------------------------------------------------------------------------------------------
-DAT_SEASON_STATION <- read.table("../dataFiles/pares/INTERVALO/monthlyPairs/STATION_mSEASON.txt",sep = ",", header = TRUE, fill = FALSE)
+DAT_SEASON_STATION <- read.table("../dataFiles/pares/INTERVALO/monthlyPairs/pom/STATION_mSEASON.txt",sep = ",", header = TRUE, fill = FALSE)
 OBS_SEASON_STATION <- DAT_SEASON_STATION$OBSERVACION
 FCT_SEASON_STATION <- DAT_SEASON_STATION$PRONOSTICO
 

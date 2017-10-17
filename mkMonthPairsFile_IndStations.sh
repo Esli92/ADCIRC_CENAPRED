@@ -2,19 +2,20 @@
 
 #Programa para unir todos los archivos de pares de observaciones en un solo archivo para usar en R. Genera un archivo mensual de todo, por estacion.
 
-echo 'BULK PAIRS ALL V2.0 -----> Indica los siguientes datos'
+echo 'BULK PAIRS ALL V3.0 -----> ¡Dame un momento!'
 #read -p 'Indica la resolucion (5 o 25): ' RESOLUTION
 #read -p 'Indica el mes de simulacion (mm): ' MES
 
 
 
-DIRECTORIO_ESTACIONES=../dataFiles/estaciones_gom    
+DIRECTORIO_ESTACIONES=../dataFiles/estaciones_gom   
 DIRECTORIO_MESES=./fechas/months
 
 for MES in `ls $DIRECTORIO_MESES`
 do
 
-	for INTERVALO in 02 24 47 79 91 06 61 48 96 72 120
+	#for INTERVALO in 02 24 47 79 91 06 61 48 96 72 120
+	for INTERVALO in 02 24 47 79 91
 	do
 
 		PAIR_FILES=../dataFiles/pares/${INTERVALO}
@@ -22,6 +23,7 @@ do
 		if [ ! -d "${PAIR_FILES}/monthlyPairs/gom" ]
 		then
 			mkdir -p ${PAIR_FILES}/monthlyPairs/gom
+			rm ${PAIR_FILES}/monthlyPairs/gom/*
 		fi	
 
 		HEADER_SAMPLE=pairHead

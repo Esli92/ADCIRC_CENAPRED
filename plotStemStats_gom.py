@@ -19,12 +19,10 @@ import matplotlib.pyplot as plt
 
 #---------------BEGIN PROGRAM-----------------------------------------------------------
 
-#statnames = ['Acpco','PtAng','Htlco','PtChs','LzCar','Zihua','SalCr','Mztln','PtVal']
-statnames = ['Acpco','PtAng','Htlco','LzCar','SalCr','Mztln','PtVal']
+statnames = ['Txpan','Vercz','Frnt','Progs','Telch','PtoMo','IsMuj']
 mesnams = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
 x = range(len(statnames))
 
-#intervalos = ['02','06','24','47','48','61','72','79','91','96','120']
 intervalos = ['02','91']
 internams = ['1 a 24 horas','97 a 120 horas']
 i = 0
@@ -32,7 +30,7 @@ for intervalo in intervalos:
 
     for month in range(1,13):
         
-        serfile='verify_monthly/{}/stats/pom/ioa_m_{}.txt'.format(intervalo,month)
+        serfile='verify_monthly/{}/stats/gom/ioa_m_{}.txt'.format(intervalo,month)
         sertest = pd.read_csv(serfile,sep=',')
         
         plt.stem(x,sertest['IOA'])
@@ -43,11 +41,11 @@ for intervalo in intervalos:
         plt.ylabel('IOA')
         plt.xlabel('Estacion')
         
-        figstr = '../figures/stem/{}/ioa/stemplot_ioa_m{}'.format(intervalo,month)
+        figstr = '../figures/stemgom/{}/ioa/stemplot_ioa_m{}'.format(intervalo,month)
         plt.savefig(figstr)
         plt.clf()
         
-        serfile='verify_monthly/{}/stats/pom/bias_m_{}.txt'.format(intervalo,month)
+        serfile='verify_monthly/{}/stats/gom/bias_m_{}.txt'.format(intervalo,month)
         sertest = pd.read_csv(serfile,sep=',')
         
         plt.stem(x,sertest['BIAS'])
@@ -58,11 +56,11 @@ for intervalo in intervalos:
         plt.ylabel('BIAS (m)')
         plt.xlabel('Estacion')
         
-        figstr = '../figures/stem/{}/bias/stemplot_bias_m{}'.format(intervalo,month)
+        figstr = '../figures/stemgom/{}/bias/stemplot_bias_m{}'.format(intervalo,month)
         plt.savefig(figstr)
         plt.clf()
         
-        serfile='verify_monthly/{}/stats/pom/corr_m_{}.txt'.format(intervalo,month)
+        serfile='verify_monthly/{}/stats/gom/corr_m_{}.txt'.format(intervalo,month)
         sertest = pd.read_csv(serfile,sep=',')
         
         plt.stem(x,sertest['Pearson'])
@@ -73,11 +71,11 @@ for intervalo in intervalos:
         plt.ylabel('Coeficiente de correlacion de Pearson')
         plt.xlabel('Estacion')
         
-        figstr = '../figures/stem/{}/corr/stemplot_corr_m{}'.format(intervalo,month)
+        figstr = '../figures/stemgom/{}/corr/stemplot_corr_m{}'.format(intervalo,month)
         plt.savefig(figstr)
         plt.clf()
         
-        serfile='verify_monthly/{}/stats/pom/rmse_m_{}.txt'.format(intervalo,month)
+        serfile='verify_monthly/{}/stats/gom/rmse_m_{}.txt'.format(intervalo,month)
         sertest = pd.read_csv(serfile,sep=',')
         
         plt.stem(x,sertest['RMSE'])
@@ -85,14 +83,14 @@ for intervalo in intervalos:
         plt.xticks(rotation=90)
         
         plt.title('Valor de RMSE del intervalo {} para el mes {}'.format(internams[i],mesnams[month-1]))
-        plt.ylabel('RMSE (m) ')
+        plt.ylabel('RMSE (m)')
         plt.xlabel('Estacion')
         
-        figstr = '../figures/stem/{}/rmse/stemplot_rmse_m{}'.format(intervalo,month)
+        figstr = '../figures/stemgom/{}/rmse/stemplot_rmse_m{}'.format(intervalo,month)
         plt.savefig(figstr)
         plt.clf()
 
-        serfile='verify_monthly/{}/stats/pom/rmsedb_m_{}.txt'.format(intervalo,month)
+        serfile='verify_monthly/{}/stats/gom/rmsedb_m_{}.txt'.format(intervalo,month)
         sertest = pd.read_csv(serfile,sep=',')
         
         plt.stem(x,sertest['RMSEdb'])
@@ -103,7 +101,7 @@ for intervalo in intervalos:
         plt.ylabel('RMSEdb (m)')
         plt.xlabel('Estacion')
         
-        figstr = '../figures/stem/{}/rmsedb/stemplot_rmsedb_m{}'.format(intervalo,month)
+        figstr = '../figures/stemgom/{}/rmsedb/stemplot_rmsedb_m{}'.format(intervalo,month)
         plt.savefig(figstr)
         plt.clf()
-    i = i + 1 
+    i = i + 1
