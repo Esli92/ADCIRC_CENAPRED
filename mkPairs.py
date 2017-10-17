@@ -39,8 +39,8 @@ from shutil import copyfile
 cl_line = sys.argv
 
 #Lineas usadas en el debug 
-OBS_file_name = '../dataFiles/observaciones/2015/fixed/24780.txt'
-WRF_file_name = '../dataFiles/pronosticos/timeSeries/2015/12/TimeSeries_pom_m_12_d_29_120h_24780_node.txt'
+OBS_file_name = '../dataFiles/observaciones/2017/fixed/8768094.txt'
+WRF_file_name = '../dataFiles/pronosticos/timeSeries/2017/08/TimeSeries_gom_m_08_d_24_120h_8768094_node.txt'
 	
 #OBS_file_name = cl_line[1]
 #WRF_file_name = cl_line[2]
@@ -225,7 +225,7 @@ wrf_month = int(wrf_month)
 ##############TIME SERIES FOR PLOT SECTION###################################
 date_list=[]
 for line in pair_list:
-    date_str = '2015/{}/{} {}:00'.format(int(line[0]),int(line[1]),int(line[2])) 
+    date_str = '2017/{}/{} {}:00'.format(int(line[0]),int(line[1]),int(line[2])) 
     date_list.append(date_str)
 
 dates = pd.to_datetime(date_list)
@@ -243,12 +243,12 @@ astro_series = pd.Series(astronomical,index=dates)
 
 joint_series = pd.DataFrame({'obs' : observ_series,'adc' : adcirc_series})
 mean_series = pd.DataFrame({'obs-mean' : observ_series - observ_series.mean(),'adcirc-mean' : adcirc_series - adcirc_series.mean()})
-#mean_astro_series = pd.DataFrame({'obs-mean' : observ_series - observ_series.mean(),'adcirc-mean' : adcirc_series - adcirc_series.mean(),'astro-mean' : astro_series - astro_series.mean()})
+mean_astro_series = pd.DataFrame({'obs-mean' : observ_series - observ_series.mean(),'adcirc-mean' : adcirc_series - adcirc_series.mean(),'astro-mean' : astro_series - astro_series.mean()})
 
-#mean_astro_series.plot(title='Series de tiempo estacion PtoVallarta')
-#plt.ylabel('Elevacion (m)')
-#figstr = '../figures/astro/ts_plot_d_{}_m_{}_st_PtoVallarta.png'.format(wrf_day,wrf_month)
-#plt.savefig(figstr)
+mean_astro_series.plot(title='Series de tiempo estacion ')
+plt.ylabel('Elevacion (m)')
+figstr = '../figures/astro_tx/ts_plot_d_{}_m_{}_st_.png'.format(wrf_day,wrf_month)
+plt.savefig(figstr)
 # 
 # ############GET different pairs (24h, 48h, 120h, l24h, l48h, etc).
 oi = 0

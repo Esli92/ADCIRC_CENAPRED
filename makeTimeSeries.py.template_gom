@@ -46,7 +46,7 @@ n_nodes = len(ncfile.dimensions["node"])
 
 #Declare the nodes to get a time series from (list)
 
-nodes = [25492,25493,25599]
+nodes = [15178,13074,18564,18931,21845,24375,26875,30973,28186,12594,12284,10691,8673,13801,13694,13646]
 
 times = time[:]
 dates = nc.num2date(time[:],units=time.units,calendar='standard')

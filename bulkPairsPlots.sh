@@ -17,12 +17,12 @@
 
 
 #----------------Directorios Locales, cambiar si es necesario----------------------------
-DIR_OBS=../dataFiles/observaciones/2015/fixed
+DIR_OBS=../dataFiles/observaciones/2017/fixed
 DIR_SCRIPT=`pwd`
 DIR_FOR=../dataFiles/pronosticos/timeSeries
 DIR_OUT=../dataFiles/pares/
 #DIR_ESTACIONES=../dataFiles/estaciones_chidas
-DIR_ESTACIONES=../dataFiles/estacion_vall
+DIR_ESTACIONES=../dataFiles/estaciones_texas
 
 #En este caso particular los archivos tienen este camino:
 #OBS: ../dataFiles/observaciones/2015/fixed/NODE.txt
@@ -32,7 +32,7 @@ DIR_ESTACIONES=../dataFiles/estacion_vall
 for NODE in `ls $DIR_ESTACIONES`
 do
     source $DIR_ESTACIONES/$NODE
-    for YEAR in `ls $DIR_FOR`
+    for YEAR in 2017
     do
         #Ahora necesitamos movernos entre los meses del anio
         for MONTH in `ls $DIR_FOR/$YEAR`
@@ -40,7 +40,7 @@ do
         do
             #mkdir -p ${DIR_OUT}/${MONTH}
             #Y por ultimo nos movemos entre los dos dominios, gom y pom
-            for DOMAIN in pom
+            for DOMAIN in gom
             do
                 #Ahora nos movemos entre los diferentes archivos que hay, solo los fort.63.nc
                 for DAY in `ls $DIR_FOR/$YEAR/$MONTH/TimeSeries_${DOMAIN}_*_${NODE}_node.txt | awk -F'_' '{print $6}'`
