@@ -39,8 +39,8 @@ from shutil import copyfile
 cl_line = sys.argv
 
 #Lineas usadas en el debug 
-OBS_file_name = '../dataFiles/observaciones/2017/fixed/8768094.txt'
-WRF_file_name = '../dataFiles/pronosticos/timeSeries/2017/08/TimeSeries_gom_m_08_d_24_120h_8768094_node.txt'
+OBS_file_name = '../dataFiles/observaciones/2017/fixed/30973.txt'
+WRF_file_name = '../dataFiles/pronosticos/timeSeries/2017/09/TimeSeries_gom_m_09_d_09_120h_30973_node.txt'
 	
 #OBS_file_name = cl_line[1]
 #WRF_file_name = cl_line[2]
@@ -245,9 +245,9 @@ joint_series = pd.DataFrame({'obs' : observ_series,'adc' : adcirc_series})
 mean_series = pd.DataFrame({'obs-mean' : observ_series - observ_series.mean(),'adcirc-mean' : adcirc_series - adcirc_series.mean()})
 mean_astro_series = pd.DataFrame({'obs-mean' : observ_series - observ_series.mean(),'adcirc-mean' : adcirc_series - adcirc_series.mean(),'astro-mean' : astro_series - astro_series.mean()})
 
-mean_astro_series.plot(title='Series de tiempo estacion ')
+mean_astro_series.plot(title='Series de tiempo estacion FreshwaterCanal')
 plt.ylabel('Elevacion (m)')
-figstr = '../figures/astro_tx/ts_plot_d_{}_m_{}_st_.png'.format(wrf_day,wrf_month)
+figstr = '../figures/astro_tx/ts_plot_d_{}_m_{}_st_FreshwaterCanal.png'.format(wrf_day,wrf_month)
 plt.savefig(figstr)
 # 
 # ############GET different pairs (24h, 48h, 120h, l24h, l48h, etc).

@@ -21,13 +21,14 @@ import matplotlib.dates as mdates
 
 #---------------BEGIN PROGRAM-----------------------------------------------------------
 
-statnames = ['Tuxpan','Veracruz','Frontera','Campeche','Celestun','Progreso','Telchac','PtoMorelos','IslaMujeres']
-stations = ['11129',  '19881',  '29907',  '40273',  '42550',  '44732',  '45878',  '73509',  '75448']
+statnames = ['Aransas Pass','Port O Connor','Matagorda Bay','Sargent','Galveston Bay Entrance','Texas Point','Freshwater Canal','Calcasieau Pass','Bob Hall Pier','Packery Channel','SPI Brazos Santiago','South Padre Island','Port Isabel']
+stations = ['15178','18564','18931','21845','24375','26875','30973','28186','12594','12284','13801','13694','13646']
 #internams = ['1 a 24','25 a 48','49 a 72','73 a 96', '97 a 120']
 internams = ['1 a 24','97 a 120']
-mesnams = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+#mesnams = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+mesnams = ['Agosto']
 #stations = ['17522']
-
+meses=[8]
 
 
 matplotlib.rcParams.update({'font.size': 12})
@@ -43,7 +44,7 @@ for intervalo in intervalos:
     i = 0
     for station in stations:
         k = 0
-        for month in range(1,13):
+        for month in meses:
             
             serfile='../dataFiles/pares/{}/monthlyPairs/gom/{}_m{}.txt'.format(intervalo,station,month)
             sertest = pd.read_csv(serfile,sep=',')
@@ -51,20 +52,19 @@ for intervalo in intervalos:
             sertest['datecol'] = pd.to_datetime(sertest['datecol'],format='%Y-%m-%d-%H')
             sertest = sertest.set_index(sertest['datecol'])
             newser = pd.DataFrame({'observación' : sertest['OBSERVACION'],'modelo' : sertest['PRONOSTICO']})
-            fig, ax = plt.subplots(figsize=(7, 4))
-            for col, style, lw in zip(newser.columns, styles, linewidths):
-                newser[col].plot(style=style, lw=lw, ax=ax)
-            
-            #myFmt = mdates.DateFormatter('%d')
-            #ax.xaxis.set_major_formatter(myFmt)
-            plt.legend(loc='upper left')
-            plt.title('Serie reconstruida con intervalo de {} horas, \n estación {}, mes {}, año 2015'.format(internams[j],statnames[i],mesnams[k]))
-            plt.ylabel('Elevación del nivel del mar')
-            plt.xlabel('Tiempo')
-            
-            figstr = '../figures/reconsgom/rec_st_{}_int_{}_m{}'.format(statnames[i],intervalo,month)
-            plt.savefig(figstr)
-            plt.clf()
+            try:
+                fig, ax = plt.subplots(figsize=(7, 4))
+                for col, style, lw in zip(newser.columns, styles, linewidths):
+                    newser[col].plot(style=style, lw=lw, ax=ax)
+                plt.legend(loc='upper left')
+                plt.title('Serie reconstruida con intervalo de {} horas, \n estación {}, mes {}, año 2015'.format(internams[j],statnames[i],mesnams[k]))
+                plt.ylabel('Elevación del nivel del mar')
+                plt.xlabel('Tiempo')
+                figstr = '../figures/reconstex/rec_st_{}_int_{}_m{}'.format(statnames[i],intervalo,month)
+                plt.savefig(figstr)
+                plt.clf()
+            except:
+                continue
             k = k + 1
         i = i +1
     j = j + 1

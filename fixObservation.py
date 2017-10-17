@@ -12,8 +12,8 @@ import matplotlib.pyplot as plt
 cl_line = sys.argv
 
 #Lineas usadas en el debug 
-OBS_file_name = '../dataFiles/observaciones/2017/texas/8779770_obs.txt'
-FOR_file_name = '../dataFiles/observaciones/2017/texas/8779770_marpron.txt'
+OBS_file_name = '../dataFiles/observaciones/2017/texas/30973_obs.txt'
+FOR_file_name = '../dataFiles/observaciones/2017/texas/30973_marpron.txt'
 
 obse = pd.read_csv(OBS_file_name,sep=',',index_col=0,parse_dates=True)
 fore = pd.read_csv(FOR_file_name,sep=',',index_col=0,parse_dates=True)
@@ -131,7 +131,7 @@ for i in test:
 pronobsts = pd.DataFrame({'mar_astr' : fore_series[' Prediction'],'elev_obs' : elev_series[' Water Level']})
 
 #Print to CSV file.
-pronobsts.to_csv('../dataFiles/observaciones/2017/fixed/8779770.txt',sep=' ',na_rep='nan',date_format='%Y-%m-%d %H %M %S',index_label='date',quotechar=' ')
+pronobsts.to_csv('../dataFiles/observaciones/2017/fixed/30973.txt',sep=',',na_rep='nan',index_label=['Date'])
 #pronobsts.plot()
 #plt.show()
 

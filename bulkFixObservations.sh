@@ -43,6 +43,6 @@ do
             python fixObservation.py
             rm fixObservation.py.pre 
         done
-    done
+    
 
 done

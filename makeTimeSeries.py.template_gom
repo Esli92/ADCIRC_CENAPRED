@@ -58,9 +58,9 @@ for node in nodes:
     o_file = open(filename,'w')
     for tim in range(n_tim):
         if zeta_node[tim] is ma.masked:
-            line = '{:%Y,%m,%d,%H,%M,%S}, 0.0\n'.format(dates[tim])
+            line = '{:%Y-%m-%d %H:%M:%S}, 0.0\n'.format(dates[tim])
         else:
-            line = '{:%Y,%m,%d,%H,%M,%S},{:06.15f}\n'.format(dates[tim],zeta_node[tim])
+            line = '{:%Y-%m-%d %H:%M:%S},{:06.15f}\n'.format(dates[tim],zeta_node[tim])
         o_file.write(line)
         
     o_file.close()

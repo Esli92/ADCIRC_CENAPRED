@@ -8,41 +8,53 @@ echo 'BULK PAIRS ALL V3.0 -----> ¡Dame un momento!'
 
 
 
-DIRECTORIO_ESTACIONES=../dataFiles/estaciones_gom   
+DIRECTORIO_ESTACIONES=../dataFiles/estaciones_texas   
 DIRECTORIO_MESES=./fechas/months
-
-for MES in `ls $DIRECTORIO_MESES`
+IND=1
+echo $IND
+for INTERVALO in 02 24 47 79 91
 do
-
+    PAIR_FILES=../dataFiles/pares/${INTERVALO}
+    rm ${PAIR_FILES}/monthlyPairs/gom/*
 	#for INTERVALO in 02 24 47 79 91 06 61 48 96 72 120
-	for INTERVALO in 02 24 47 79 91
+	IND=1
+	echo $IND
+	for MES in 8 9 
 	do
-
-		PAIR_FILES=../dataFiles/pares/${INTERVALO}
+        
+		
 
 		if [ ! -d "${PAIR_FILES}/monthlyPairs/gom" ]
 		then
 			mkdir -p ${PAIR_FILES}/monthlyPairs/gom
 			rm ${PAIR_FILES}/monthlyPairs/gom/*
 		fi	
-
+        
 		HEADER_SAMPLE=pairHead
 		#cd $PAIR_FILES
 
 		#VARIABLE=TM
 		for ESTACION in `ls $DIRECTORIO_ESTACIONES`
 		do
-				#rm ${PAIR_FILES}/${ESTACION}_m${MES}.txt 
-
-				head -1 ${HEADER_SAMPLE} > ${PAIR_FILES}/${ESTACION}_m${MES}.txt; tail -n +2 -q ${PAIR_FILES}/ObsFct_Pairs_${ESTACION}_??_${MES}_e_${INTERVALO}_*  >> ${PAIR_FILES}/${ESTACION}_m${MES}.txt
+				#rm ${PAIR_FILES}/${ESTACION}_m8.txt 
+                #if [ $IND=1 ] 
+                #then
+                #    head -1 ${HEADER_SAMPLE} > ${PAIR_FILES}/${ESTACION}_m8.txt
+                #    IND=False
+                #    echo $IND
+                #fi
+				tail -n +2 -q ${PAIR_FILES}/ObsFct_Pairs_${ESTACION}_??_${MES}_e_${INTERVALO}_*  >> ${PAIR_FILES}/${ESTACION}_m8p.txt
 
 				#awk 'BEGIN { FS = "," }; $4 != -99 {print $1","$2","$3","$4","$5}' ${PAIR_FILES}/${ESTACION}_${VARIABLE}_m${MES}.pre >> ${PAIR_FILES}/${ESTACION}_${VARIABLE}_m${MES}.txt
 
-				mv ${PAIR_FILES}/${ESTACION}_m${MES}.txt ${PAIR_FILES}/monthlyPairs/gom
+				
 				#rm ${PAIR_FILES}/${ESTACION}_${VARIABLE}_m${MES}.pre
 		done
-
+        cat $HEADER_SAMPLE ${PAIR_FILES}/${ESTACION}_m8p.txt > ${PAIR_FILES}/${ESTACION}_m8.txt
 		#Para hacer un archivo con TODOS los pares de TODAS las estaciones del mes
-
+   
 	done
+	  ${PAIR_FILES}/*_m8.txt ${PAIR_FILES}/monthlyPairs/gom
 done
+
+

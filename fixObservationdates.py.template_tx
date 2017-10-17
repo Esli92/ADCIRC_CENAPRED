@@ -131,7 +131,7 @@ for i in test:
 pronobsts = pd.DataFrame({'mar_astr' : fore_series[' Prediction'],'elev_obs' : elev_series[' Water Level']})
 
 #Print to CSV file.
-pronobsts.to_csv('OUTFILE.txt',sep=' ',na_rep='nan',date_format='%Y-%m-%d %H %M %S',index_label='date',quotechar=' ')
+pronobsts.to_csv('OUTFILE.txt',sep=',',na_rep='nan',index_label=['Date'])
 #pronobsts.plot()
 #plt.show()
 
