@@ -19,16 +19,19 @@ import matplotlib.pyplot as plt
 
 #---------------BEGIN PROGRAM-----------------------------------------------------------
 
-statnames = ['Txpan','Vercz','Frnt','Progs','Telch','PtoMo','IsMuj']
-mesnams = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+statnames = ['Arans','Matag','Galvs','BobHl','SPIBr','StPIs','PtIsa']
+#mesnams = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+mesnams = ['Harvey']
 x = range(len(statnames))
+meses = [8]
 
-intervalos = ['02','91']
-internams = ['1 a 24 horas','97 a 120 horas']
+#intervalos = ['02','91']
+intervalos = ['02','24','47','79','91']
+internams = ['1 a 24','25 a 48','49 a 72','73 a 96', '97 a 120']
 i = 0
 for intervalo in intervalos:
 
-    for month in range(1,13):
+    for month in meses:
         
         serfile='verify_monthly/{}/stats/gom/ioa_m_{}.txt'.format(intervalo,month)
         sertest = pd.read_csv(serfile,sep=',')
@@ -37,11 +40,11 @@ for intervalo in intervalos:
         plt.xticks(x,statnames)
         plt.xticks(rotation=90)
         
-        plt.title('Valor de IOA del intervalo {} para el mes {}'.format(internams[i],mesnams[month-1]))
+        plt.title('Valor de IOA del intervalo {} para el evento {}'.format(internams[i],mesnams[0]))
         plt.ylabel('IOA')
         plt.xlabel('Estacion')
         
-        figstr = '../figures/stemgom/{}/ioa/stemplot_ioa_m{}'.format(intervalo,month)
+        figstr = '../figures/stemtex/{}/ioa/stemplot_ioa_m{}'.format(intervalo,month)
         plt.savefig(figstr)
         plt.clf()
         
@@ -52,11 +55,11 @@ for intervalo in intervalos:
         plt.xticks(x,statnames)
         plt.xticks(rotation=90)
         
-        plt.title('Valor del sesgo (BIAS) del intervalo {} para el mes {}'.format(internams[i],mesnams[month-1]))
+        plt.title('Valor del sesgo (BIAS) del intervalo {} para el evento {}'.format(internams[i],mesnams[0]))
         plt.ylabel('BIAS (m)')
         plt.xlabel('Estacion')
         
-        figstr = '../figures/stemgom/{}/bias/stemplot_bias_m{}'.format(intervalo,month)
+        figstr = '../figures/stemtex/{}/bias/stemplot_bias_m{}'.format(intervalo,month)
         plt.savefig(figstr)
         plt.clf()
         
@@ -67,11 +70,11 @@ for intervalo in intervalos:
         plt.xticks(x,statnames)
         plt.xticks(rotation=90)
         
-        plt.title('Valor del coeficiente de correlacion \ndel intervalo {} para el mes {}'.format(internams[i],mesnams[month-1]))
+        plt.title('Valor del coeficiente de correlacion \ndel intervalo {} para el evento {}'.format(internams[i],mesnams[0]))
         plt.ylabel('Coeficiente de correlacion de Pearson')
         plt.xlabel('Estacion')
         
-        figstr = '../figures/stemgom/{}/corr/stemplot_corr_m{}'.format(intervalo,month)
+        figstr = '../figures/stemtex/{}/corr/stemplot_corr_m{}'.format(intervalo,month)
         plt.savefig(figstr)
         plt.clf()
         
@@ -82,11 +85,11 @@ for intervalo in intervalos:
         plt.xticks(x,statnames)
         plt.xticks(rotation=90)
         
-        plt.title('Valor de RMSE del intervalo {} para el mes {}'.format(internams[i],mesnams[month-1]))
+        plt.title('Valor de RMSE del intervalo {} para el evento {}'.format(internams[i],mesnams[0]))
         plt.ylabel('RMSE (m)')
         plt.xlabel('Estacion')
         
-        figstr = '../figures/stemgom/{}/rmse/stemplot_rmse_m{}'.format(intervalo,month)
+        figstr = '../figures/stemtex/{}/rmse/stemplot_rmse_m{}'.format(intervalo,month)
         plt.savefig(figstr)
         plt.clf()
 
@@ -97,11 +100,11 @@ for intervalo in intervalos:
         plt.xticks(x,statnames)
         plt.xticks(rotation=90)
         
-        plt.title('Valor de RMSEdb del intervalo {} para el mes {}'.format(internams[i],mesnams[month-1]))
+        plt.title('Valor de RMSEdb del intervalo {} para el evento {}'.format(internams[i],mesnams[0]))
         plt.ylabel('RMSEdb (m)')
         plt.xlabel('Estacion')
         
-        figstr = '../figures/stemgom/{}/rmsedb/stemplot_rmsedb_m{}'.format(intervalo,month)
+        figstr = '../figures/stemtex/{}/rmsedb/stemplot_rmsedb_m{}'.format(intervalo,month)
         plt.savefig(figstr)
         plt.clf()
     i = i + 1

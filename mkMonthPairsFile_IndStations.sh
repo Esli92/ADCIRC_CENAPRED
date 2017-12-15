@@ -10,15 +10,15 @@ echo 'BULK PAIRS ALL V3.0 -----> ¡Dame un momento!'
 
 DIRECTORIO_ESTACIONES=../dataFiles/estaciones_texas   
 DIRECTORIO_MESES=./fechas/months
-IND=1
-echo $IND
+#IND=1
+#echo $IND
 for INTERVALO in 02 24 47 79 91
 do
     PAIR_FILES=../dataFiles/pares/${INTERVALO}
     rm ${PAIR_FILES}/monthlyPairs/gom/*
 	#for INTERVALO in 02 24 47 79 91 06 61 48 96 72 120
-	IND=1
-	echo $IND
+	#IND=1
+	#echo $IND
 	for MES in 8 9 
 	do
         
@@ -47,14 +47,14 @@ do
 
 				#awk 'BEGIN { FS = "," }; $4 != -99 {print $1","$2","$3","$4","$5}' ${PAIR_FILES}/${ESTACION}_${VARIABLE}_m${MES}.pre >> ${PAIR_FILES}/${ESTACION}_${VARIABLE}_m${MES}.txt
 
-				
+				cat $HEADER_SAMPLE ${PAIR_FILES}/${ESTACION}_m8p.txt > ${PAIR_FILES}/${ESTACION}_m8.txt
 				#rm ${PAIR_FILES}/${ESTACION}_${VARIABLE}_m${MES}.pre
 		done
-        cat $HEADER_SAMPLE ${PAIR_FILES}/${ESTACION}_m8p.txt > ${PAIR_FILES}/${ESTACION}_m8.txt
+        
 		#Para hacer un archivo con TODOS los pares de TODAS las estaciones del mes
    
 	done
-	  ${PAIR_FILES}/*_m8.txt ${PAIR_FILES}/monthlyPairs/gom
+	  mv ${PAIR_FILES}/*_m8.txt ${PAIR_FILES}/monthlyPairs/gom
 done
 
 

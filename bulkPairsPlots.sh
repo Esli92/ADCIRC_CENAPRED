@@ -27,7 +27,7 @@ DIR_ESTACIONES=../dataFiles/estaciones_texas
 #En este caso particular los archivos tienen este camino:
 #OBS: ../dataFiles/observaciones/2015/fixed/NODE.txt
 #FOR: ../dataFiles/pronosticos/timeSeries/2015/01/TimeSeries_pom_m_01_d_31_120h_25492_node.txt
-#find ../dataFiles/pares -name "*.txt" -exec rm {} \; 
+find ../dataFiles/pares -name "*.txt" -exec rm {} \; 
 #Comenzamos con el anio que vamos a leer, que esta dentro del directorio validacion_ADCIRC
 for NODE in `ls $DIR_ESTACIONES`
 do
@@ -50,7 +50,7 @@ do
                         OBSFILE=${DIR_OBS}/${NODE}.txt
                         #Aqui es donde empieza lo bueno, modificar el template para usarlo. 
                         #El primer paso es cambiar el nombre del archivo a usar
-                        sed 's:'FILENAME':'$DIR_FOR/$YEAR/$MONTH/$FILENAME':g' mkObsFrcstPairs.py.template > mkPairs.py.pre
+                        sed 's:'FILENAME':'$DIR_FOR/$YEAR/$MONTH/$FILENAME':g' mkObsFrcstPairs.py.template2 > mkPairs.py.pre
                         sed 's:'ESTATTITTON':'$NAME':g' mkPairs.py.pre > mkPairs.py2.pre
                         sed 's:'OBSERVATIONFILE':'$OBSFILE':g' mkPairs.py2.pre > mkPairs.py
                         python mkPairs.py               
