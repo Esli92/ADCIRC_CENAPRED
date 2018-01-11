@@ -28,8 +28,8 @@ import numpy.ma as ma
 #We start by loading the ncfile, with reading permissions to avoid changing anything.
 
 ncfile = nc.Dataset("../hycom/Anual3d_cut_Veracruz.nc","r",format="NETCDF4")
-adfile = nc.Dataset("../hycom/casos/02_nuevoMetodoInterp/fort.64.nc","r",format="NETCDF4")
-zfile = nc.Dataset("../hycom/casos/02_nuevoMetodoInterp/fort.63.nc","r",format="NETCDF4")
+adfile = nc.Dataset("../hycom/casos/03_nodosNoInversos/fort.64_elev_ssh.nc","r",format="NETCDF4")
+zfile = nc.Dataset("../hycom/casos/03_nodosNoInversos/fort.64_elev.nc","r",format="NETCDF4")
 
 
 def geo_idx(dd, dd_array):
@@ -75,7 +75,7 @@ hycofile.write(line)
 adcofile.write(line)
 
 for nd in boundary_nodes:
-    filename = '../hycom/casos/02_nuevoMetodoInterp/TimeSeries_{}_node.txt'.format(nd)
+    filename = '../hycom/casos/03_nodosNoInversos/TimeSeries_{}_node.txt'.format(nd)
     o_file = open(filename,'w')
     line = 'Datetime,ua_hycom,va_hycom,u_adcirc,v_adcirc,ssh_hycom,zeta_adcirc\n'
     o_file.write(line)

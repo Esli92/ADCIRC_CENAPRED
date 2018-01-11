@@ -40,7 +40,7 @@ from shutil import copyfile
 
 #Lineas usadas en el debug 
 for node in range(0,77):
-    OBS_file_name = '../hycom/casos/02_nuevoMetodoInterp/TimeSeries_{}_node_nossh.txt'.format(node)
+    OBS_file_name = '../hycom/casos/04_flujoYmarea/TimeSeries_{}_node_nossh.txt'.format(node)
     #WRF_file_name = '../dataFiles/pronosticos/timeSeries/2017/09/TimeSeries_gom_m_09_d_06_120h_30973_node.txt'
 
     #OBS_file_name = '../dataFiles/observaciones/2017/fixed/12284.txt'
@@ -85,12 +85,12 @@ for node in range(0,77):
     figstr = '../figures/hycom/mag_node_{}'.format(node)
     plt.savefig(figstr)
     
-    vel_series.plot(title='Series de tiempo componentes para el nodo {}'.format(node))
+    vel_series.plot(title='Series de tiempo componentes para el nodo {}'.format(node),ylim=[-0.8,0.8])
     plt.ylabel('velocidad (m/s)')
     figstr = '../figures/hycom/uv_node_{}'.format(node)
     plt.savefig(figstr)
     
-    ssh_series.plot(title='Series de tiempo elevacion para el nodo {}'.format(node))
+    ssh_series.plot(title='Series de tiempo elevacion para el nodo {}'.format(node),ylim=[-0.3,0.6])
     plt.ylabel('Elevacion (m)')
     figstr = '../figures/hycom/ssh_node_{}'.format(node)
     plt.savefig(figstr)

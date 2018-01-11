@@ -28,9 +28,9 @@ import numpy.ma as ma
 #We start by loading the ncfile, with reading permissions to avoid changing anything.
 
 ncfile = nc.Dataset("../hycom/Anual3d_cut_Veracruz.nc","r",format="NETCDF4")
-adfile = nc.Dataset("../hycom/casos/02_nuevoMetodoInterp/fort.64.nc","r",format="NETCDF4")
-zfile = nc.Dataset("../hycom/casos/02_nuevoMetodoInterp/fort.63.nc","r",format="NETCDF4")
-nosshfile = nc.Dataset("../hycom/fort.63_elev.nc","r",format="NETCDF4")
+adfile = nc.Dataset("../hycom/casos/04_flujoYmarea/fort.64_elev_flujo2D.nc","r",format="NETCDF4")
+zfile = nc.Dataset("../hycom/casos/04_flujoYmarea/fort.63_elev_flujo2D.nc","r",format="NETCDF4")
+nosshfile = nc.Dataset("../hycom/casos/04_flujoYmarea/fort.63_elev.nc","r",format="NETCDF4")
 
 def geo_idx(dd, dd_array):
    geo_idx = (numpy.abs(dd_array - dd)).argmin()
@@ -71,17 +71,17 @@ nodes = boundary_nodes
 
 dates = nc.num2date(time[:],units=time.units,calendar='standard')
 for nd in boundary_nodes:
-    filename = '../hycom/casos/02_nuevoMetodoInterp/TimeSeries_{}_node_nossh.txt'.format(nd)
+    filename = '../hycom/casos/04_flujoYmarea/TimeSeries_{}_node_nossh.txt'.format(nd)
     o_file = open(filename,'w')
     line = 'Datetime,ua_hycom,va_hycom,u_adcirc,v_adcirc,ssh_hycom,zeta_adcirc,zetanossh_ad,xcoord,ycoord,ad_lats,ad_lons,hy_lats,hy_lons\n'
     o_file.write(line)
-    xcoord = geo_idx(b_lons[-nd],lons)
-    ycoord = geo_idx(b_lats[-nd],lats)
+    xcoord = geo_idx(b_lons[nd],lons)
+    ycoord = geo_idx(b_lats[nd],lats)
     for tim in range(0,720):
         uh = u[tim,:,ycoord,xcoord]
-        ua = uh.mean()
+        ua = numpy.nanmean(uh)
         vh = v[tim,:,ycoord,xcoord]
-        va = vh.mean()
+        va = numpy.nanmean(vh)
         sshy = ssh[tim,ycoord,xcoord]
         zeta_node = zeta[tim,nd]
         zenssh_node = zenssh[tim,nd]
